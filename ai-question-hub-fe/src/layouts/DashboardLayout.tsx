@@ -17,25 +17,25 @@ import {
   PanelLeftClose,
   PanelLeft
 } from "lucide-react"
+import { Link, useLocation, useNavigate, Outlet } from "react-router-dom"
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { useTranslation } from "react-i18next"
 import { ThemeToggle, LanguageToggle } from "../components/Toggles"
+import { useAuthStore } from "../stores/authStore"
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
-  activeMenu: string
-  setActiveMenu: (menu: string) => void
-  onLogout: () => void
+  children?: React.ReactNode
 }
 
 export function DashboardLayout({
-  children,
-  activeMenu,
-  setActiveMenu,
-  onLogout
+  children
 }: DashboardLayoutProps) {
   const { t } = useTranslation()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const user = useAuthStore((state) => state.user)
+  const logout = useAuthStore((state) => state.logout)
   const [searchQuery, setSearchQuery] = React.useState("")
   const [isCollapsed, setIsCollapsed] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
@@ -46,7 +46,6 @@ export function DashboardLayout({
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current)
     }
-    // Set a delay of 450ms before expanding to avoid accidental triggers
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(true)
     }, 450)
@@ -77,10 +76,15 @@ export function DashboardLayout({
     { id: "users", label: t("sidebar.users"), icon: Users },
   ]
 
-  // Sidebar is fully open if not collapsed, or if collapsed but currently hovered
+  const activeMenu = location.pathname.split("/")[1] || "dashboard"
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
+  }
+
   const showFullText = !isCollapsed || isHovered
 
-  // Dynamic widths and margins (w-20 is 80px)
   const sidebarWidthClass = isCollapsed
     ? isHovered
       ? "w-64 shadow-2xl z-50"
@@ -89,8 +93,13 @@ export function DashboardLayout({
 
   const mainMarginClass = isCollapsed ? "md:ml-20" : "md:ml-64"
 
+  const userAvatar = user?.avatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuBeh_DdUfOkeyLYccPWRR2dgrQpb7d12vuoIti1h8RwhuHJig5rnJUX-S5rQf9bAj3oVmqHjLK8dfIdW_5GKDaLaMikR06lazODXrbELXk-iGjWMv9qB9cjmfplgGAj1rCNv_x7L7ctB-Gm4h2vCZjWfrEjpOOYxjHBt8LWCtIj7OHuCe-hYJC-GUz3yA0WpdgL4K8bl7aRmILjG01T-pV785Xj9Y9iaLVKSQOvnN1fV8ZdMWfo1Vh3oRp94KE7WJPnTdPNjs4mxtw"
+  const userName = user?.name || "Nguyễn Thắng"
+  const userFallback = userName.substring(0, 2).toUpperCase()
+  const userRole = user?.role || "common.admin"
+
   return (
-    <div className="min-h-screen text-slate-900 flex font-sans antialiased bg-background">
+    <div className="min-h-screen text-slate-900 flex font-sans antialiased bg-background w-full">
       {/* Decorative Blur Blobs for background depth */}
       <div className="fixed top-20 left-10 w-[500px] h-[500px] blob-indigo rounded-full blur-[100px] opacity-30 pointer-events-none z-0"></div>
       <div className="fixed bottom-10 right-10 w-[400px] h-[400px] blob-teal rounded-full blur-[80px] opacity-20 pointer-events-none z-0"></div>
@@ -101,7 +110,7 @@ export function DashboardLayout({
         onMouseLeave={handleMouseLeave}
         className={`fixed left-0 top-0 h-full ${sidebarWidthClass} bg-white/85 dark:bg-slate-950/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-800/50 shadow-md flex flex-col py-6 transition-all duration-300 ease-in-out z-40 hidden md:flex`}
       >
-        {/* Logo and Workspace Title (px-4 to px-5 centers the 40px logo perfectly in 80px width) */}
+        {/* Logo and Workspace Title */}
         <div className={`w-full mb-6 flex items-center transition-all duration-300 overflow-hidden ${showFullText ? "px-4 gap-3" : "px-5 gap-0"}`}>
           <div className="w-10 h-10 rounded-lg logo-gradient flex items-center justify-center shadow-md shrink-0">
             <BrainCircuit className="text-white size-6" />
@@ -112,15 +121,15 @@ export function DashboardLayout({
           </div>
         </div>
 
-        {/* Menu Links (px-4 to px-[18px] centers the 20px icon perfectly in 56px inside px-3 wrapper) */}
+        {/* Menu Links */}
         <div className="flex-1 overflow-y-auto px-3 flex flex-col gap-1 transition-all duration-300">
           {menuItems.map((item) => {
             const Icon = item.icon
             const isActive = activeMenu === item.id
             return (
-              <button
+              <Link
                 key={item.id}
-                onClick={() => setActiveMenu(item.id)}
+                to={`/${item.id}`}
                 className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden ${
                   showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
                 } ${
@@ -134,13 +143,13 @@ export function DashboardLayout({
                 <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
                   {item.label}
                 </span>
-              </button>
+              </Link>
             )
           })}
 
           {/* Settings at the bottom of list */}
-          <button
-            onClick={() => setActiveMenu("settings")}
+          <Link
+            to="/settings"
             className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden mt-auto ${
               showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
             } ${
@@ -154,26 +163,24 @@ export function DashboardLayout({
             <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
               {t("sidebar.settings")}
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* Admin profile and Logout */}
         <div className="px-4 mt-6 pt-4 border-t border-slate-200/50 dark:border-slate-800/50 flex flex-col transition-all duration-300">
-          {/* Admin Avatar (px-2 to px-[6px] centers the 36px Avatar perfectly in 48px wrapper inside px-4 parent) */}
           <div className={`flex items-center w-full transition-all duration-300 mb-4 overflow-hidden ${showFullText ? "px-2 gap-3" : "px-[6px] gap-0"}`}>
-            <Avatar className="size-9 ring-2 ring-[#2e5d97]/10 shrink-0" title={!showFullText ? "Nguyễn Thắng (Admin)" : undefined}>
-              <AvatarImage src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeh_DdUfOkeyLYccPWRR2dgrQpb7d12vuoIti1h8RwhuHJig5rnJUX-S5rQf9bAj3oVmqHjLK8dfIdW_5GKDaLaMikR06lazODXrbELXk-iGjWMv9qB9cjmfplgGAj1rCNv_x7L7ctB-Gm4h2vCZjWfrEjpOOYxjHBt8LWCtIj7OHuCe-hYJC-GUz3yA0WpdgL4K8bl7aRmILjG01T-pV785Xj9Y9iaLVKSQOvnN1fV8ZdMWfo1Vh3oRp94KE7WJPnTdPNjs4mxtw" alt="Nguyễn Thắng" />
-              <AvatarFallback>NT</AvatarFallback>
+            <Avatar className="size-9 ring-2 ring-[#2e5d97]/10 shrink-0" title={!showFullText ? `${userName} (${t(userRole)})` : undefined}>
+              <AvatarImage src={userAvatar} alt={userName} />
+              <AvatarFallback>{userFallback}</AvatarFallback>
             </Avatar>
             <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
-              <span className="font-semibold text-sm leading-none text-slate-900 dark:text-white whitespace-nowrap">Nguyễn Thắng</span>
-              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">{t("common.admin")}</span>
+              <span className="font-semibold text-sm leading-none text-slate-900 dark:text-white whitespace-nowrap">{userName}</span>
+              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">{t(userRole)}</span>
             </div>
           </div>
 
-          {/* Logout Button (px-4 in both states perfectly centers the 16px icon inside 48px wrapper) */}
           <button
-            onClick={onLogout}
+            onClick={handleLogout}
             className={`flex items-center text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-300 font-semibold text-sm cursor-pointer overflow-hidden w-full h-10 px-4 ${
               showFullText ? "gap-3" : "gap-0"
             }`}
@@ -228,15 +235,15 @@ export function DashboardLayout({
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             </button>
             <Avatar className="size-8 md:hidden">
-              <AvatarImage src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeh_DdUfOkeyLYccPWRR2dgrQpb7d12vuoIti1h8RwhuHJig5rnJUX-S5rQf9bAj3oVmqHjLK8dfIdW_5GKDaLaMikR06lazODXrbELXk-iGjWMv9qB9cjmfplgGAj1rCNv_x7L7ctB-Gm4h2vCZjWfrEjpOOYxjHBt8LWCtIj7OHuCe-hYJC-GUz3yA0WpdgL4K8bl7aRmILjG01T-pV785Xj9Y9iaLVKSQOvnN1fV8ZdMWfo1Vh3oRp94KE7WJPnTdPNjs4mxtw" alt="Nguyễn Thắng" />
-              <AvatarFallback>NT</AvatarFallback>
+              <AvatarImage src={userAvatar} alt={userName} />
+              <AvatarFallback>{userFallback}</AvatarFallback>
             </Avatar>
           </div>
         </header>
 
         {/* Content Children */}
         <div className="flex-1">
-          {children}
+          {children || <Outlet />}
         </div>
       </main>
     </div>

@@ -1,0 +1,59 @@
+{
+  "common": {
+    "searchPlaceholder": "Search projects, questions...",
+    "notifications": "Notifications",
+    "workspace": "Workspace",
+    "admin": "Administrator",
+    "underDevelopmentTitle": "Page {{name}} is under development",
+    "underDevelopmentDesc": "The interface and functionalities for this section will be completed soon.",
+    "success": "Success",
+    "loading": "Loading...",
+    "or": "or"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "loginWelcome": "Welcome back!",
+    "emailLabel": "Email or username",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "registerNow": "Register now",
+    "registerTitle": "Register",
+    "registerWelcome": "Create a new account and get started",
+    "fullNameLabel": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter password",
+    "agreeToTerms": "I agree to the Terms & Policies",
+    "haveAccount": "Already have an account?",
+    "loginNow": "Login now",
+    "registerButton": "Create Account",
+    "registerSuccess": "Registration successful!",
+    "loginSuccess": "Login successful!"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "questions": "My Questions",
+    "generate": "AI Generate",
+    "topics": "Topics",
+    "models": "AI Models",
+    "users": "Users",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "validation": {
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "passwordLength": "Password must be at least 6 characters",
+    "passwordRequired": "Password is required",
+    "fullNameRequired": "Full name is required",
+    "usernameRequired": "Username is required.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "passwordMismatch": "Passwords do not match."
+  }
+}
