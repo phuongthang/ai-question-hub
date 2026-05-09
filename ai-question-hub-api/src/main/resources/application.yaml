@@ -4,15 +4,39 @@ spring:
   application:
     name: ai-question-hub-api
   datasource:
-    url: jdbc:postgresql://localhost:5432/ai_qestion_hub
+    url: jdbc:postgresql://localhost:5432/ai_question_hub
     username: aiquestionhub
     password: aiquestionhub
     driver-class-name: org.postgresql.Driver
-    flyway:
-      enabled: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migrations
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    default-locale: en
+    use-code-as-default-message: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.aiquestionhub.aiquestionhubapi
   configuration:
     map-underscore-to-camel-case: true
+
+app:
+  jwt:
+    secret: dGhpcyBpcyBhIHZlcnkgc2VjcmV0IGtleSBmb3IgYWktcXVlc3Rpb24taHViLWFwaQ==
+    expiration-ms: 86400000
+  otp:
+    expiration-minutes: 40000
