@@ -1,13 +1,44 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/GoogleSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/GoogleSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/GoogleSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/GoogleSans-Bold.ttf') format('truetype');
+}
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Geist Variable", sans-serif;
+  --font-sans: "Google Sans", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,14 +81,14 @@
 
 :root {
   /* Design.md — Glassmorphism × Bento Grid blue palette */
-  /* #F0F3FA bg-base, #628ECB primary, #395886 primary-hover */
+  /* #F0F3FA bg-base, #2e5d97 primary, #214874 primary-hover */
   --background: oklch(0.967 0.013 255); /* #F0F3FA */
   --foreground: oklch(0.145 0.028 261); /* #0F172A ink */
   --card: oklch(1 0 0); /* white glass base */
   --card-foreground: oklch(0.145 0.028 261); /* #0F172A */
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0.028 261);
-  --primary: oklch(0.627 0.133 255); /* #628ECB Blue 400 */
+  --primary: #2e5d97; /* #2e5d97 */
   --primary-foreground: oklch(0.985 0.003 264); /* #F8FAFC */
   --secondary: oklch(0.731 0.115 255); /* #8AAEE0 Blue 300 */
   --secondary-foreground: oklch(0.145 0.028 261);
@@ -68,21 +99,21 @@
   --destructive: oklch(0.628 0.258 29.2); /* #EF4444 */
   --border: oklch(0.922 0.009 255); /* subtle blue-tinted border */
   --input: oklch(0.922 0.009 255);
-  --ring: oklch(0.627 0.133 255); /* #628ECB focus ring */
-  --chart-1: oklch(0.627 0.133 255); /* #628ECB primary blue */
+  --ring: #2e5d97; /* #2e5d97 focus ring */
+  --chart-1: #2e5d97; /* #2e5d97 primary blue */
   --chart-2: oklch(0.696 0.17 162); /* #10B981 emerald */
   --chart-3: oklch(0.769 0.188 70); /* #F59E0B amber */
   --chart-4: oklch(0.607 0.191 8); /* #E45B76 coral */
   --chart-5: oklch(0.437 0.127 255); /* #395886 dark blue */
-  --radius: 1rem; /* 16px bento card radius */
+  --radius: 0.75rem; /* 12px bento card radius */
   --sidebar: oklch(0.985 0.003 264); /* glass-white-heavy */
   --sidebar-foreground: oklch(0.145 0.028 261);
-  --sidebar-primary: oklch(0.627 0.133 255);
+  --sidebar-primary: #2e5d97;
   --sidebar-primary-foreground: oklch(0.985 0.003 264);
   --sidebar-accent: oklch(0.902 0.033 255); /* #D5DEEF muted */
   --sidebar-accent-foreground: oklch(0.145 0.028 261);
   --sidebar-border: oklch(0.922 0.009 255);
-  --sidebar-ring: oklch(0.627 0.133 255);
+  --sidebar-ring: #2e5d97;
 }
 
 .dark {
@@ -93,7 +124,7 @@
   --card-foreground: oklch(0.985 0.003 264);
   --popover: oklch(0.28 0.093 255);
   --popover-foreground: oklch(0.985 0.003 264);
-  --primary: oklch(0.627 0.133 255); /* #628ECB stays same */
+  --primary: #2e5d97; /* #2e5d97 stays same */
   --primary-foreground: oklch(0.985 0.003 264);
   --secondary: oklch(0.437 0.127 255); /* #395886 Blue 600 */
   --secondary-foreground: oklch(0.985 0.003 264);
@@ -104,20 +135,20 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 15%); /* glass-border-dark */
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.627 0.133 255);
-  --chart-1: oklch(0.627 0.133 255); /* #628ECB */
+  --ring: #2e5d97;
+  --chart-1: #2e5d97; /* #2e5d97 */
   --chart-2: oklch(0.696 0.17 162); /* #10B981 */
   --chart-3: oklch(0.769 0.188 70); /* #F59E0B */
   --chart-4: oklch(0.607 0.191 8); /* #E45B76 */
   --chart-5: oklch(0.833 0.085 255); /* #B1C9EF light blue */
   --sidebar: oklch(0.28 0.093 255); /* #243558 */
   --sidebar-foreground: oklch(0.985 0.003 264);
-  --sidebar-primary: oklch(0.627 0.133 255);
+  --sidebar-primary: #2e5d97;
   --sidebar-primary-foreground: oklch(0.985 0.003 264);
   --sidebar-accent: oklch(0.308 0.093 255);
   --sidebar-accent-foreground: oklch(0.985 0.003 264);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.627 0.133 255);
+  --sidebar-ring: #2e5d97;
 }
 
 @layer base {
@@ -137,3 +168,83 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    box-shadow: 0 8px 40px rgba(15, 23, 42, 0.10);
+  }
+
+  .dark .glass-panel {
+    background-color: rgba(36, 53, 88, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  .bg-page-gradient {
+    background: linear-gradient(135deg, #D5DEEF 0%, #F0F3FA 100%);
+  }
+
+  .blob-indigo {
+    background: radial-gradient(circle, rgba(98, 142, 203, 0.35) 0%, rgba(98, 142, 203, 0) 70%);
+  }
+
+  .blob-teal {
+    background: radial-gradient(circle, rgba(177, 201, 239, 0.25) 0%, rgba(177, 201, 239, 0) 70%);
+  }
+
+  .glass-input {
+    background-color: rgba(255, 255, 255, 0.60);
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark .glass-input {
+    background-color: rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-input:focus-within {
+    border-color: #2e5d97;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 
+      0 0 0 1px rgba(46, 93, 151, 0.4),
+      0 0 0 4px rgba(46, 93, 151, 0.15),
+      0 4px 12px rgba(46, 93, 151, 0.08);
+  }
+
+  .dark .glass-input:focus-within {
+    border-color: #a5c8ff;
+    background-color: rgba(15, 23, 42, 0.45);
+    box-shadow: 
+      0 0 0 1px rgba(165, 200, 255, 0.4),
+      0 0 0 4px rgba(165, 200, 255, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .glass-input svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-input:focus-within svg {
+    color: #2e5d97;
+    transform: scale(1.05);
+  }
+
+  .dark .glass-input:focus-within svg {
+    color: #a5c8ff;
+  }
+
+  
+  .logo-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+  }
+
+  .strip-gradient {
+    background: linear-gradient(90deg, var(--primary) 0%, #8b5cf6 50%, #B1C9EF 100%);
+  }
+}
+
