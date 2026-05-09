@@ -2,12 +2,14 @@ import * as React from "react"
 import { BrainCircuit, Mail, Lock, Eye, EyeOff, User, UserCheck, ArrowRight, AlertCircle } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import { useTranslation } from "react-i18next"
 
 interface RegisterProps {
   onNavigateToLogin: () => void
 }
 
 export function Register({ onNavigateToLogin }: RegisterProps) {
+  const { t } = useTranslation()
   const [fullname, setFullname] = React.useState("")
   const [username, setUsername] = React.useState("")
   const [email, setEmail] = React.useState("")
@@ -44,7 +46,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
     }
 
     console.log("Đăng ký với:", { fullname, username, email, password })
-    alert(`Đăng ký tài khoản thành công cho: ${fullname}`)
+    alert(`${t("auth.registerSuccess")} ${fullname}`)
     onNavigateToLogin()
   }
 
@@ -64,10 +66,10 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
         {/* Title & Description */}
         <div>
           <h2 className="text-[26px] font-bold tracking-[-0.4px] text-foreground mb-1 font-sans">
-            Tạo tài khoản
+            {t("auth.registerTitle")}
           </h2>
           <p className="text-[14px] text-muted-foreground font-sans">
-            Tham gia để quản lý dự án & sinh câu hỏi bằng AI
+            {t("auth.registerWelcome")}
           </p>
         </div>
 
@@ -76,7 +78,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
           {/* Họ và tên */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="fullname" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Họ và tên
+              {t("auth.fullNameLabel")}
             </Label>
             <div className="glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200">
               <User className="text-muted-foreground size-5 shrink-0" />
@@ -85,7 +87,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
                 type="text"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
-                placeholder="Nhập họ và tên"
+                placeholder={t("auth.fullNamePlaceholder")}
                 required
                 className="bg-transparent border-none focus-visible:ring-0 shadow-none p-0 h-full w-full font-sans text-[14px] text-foreground placeholder:text-muted-foreground/40"
               />
@@ -95,7 +97,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
           {/* Tên đăng nhập */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="username" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Tên đăng nhập
+              {t("auth.emailLabel")}
             </Label>
             <div className="glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200">
               <UserCheck className="text-muted-foreground size-5 shrink-0" />
@@ -104,7 +106,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Nhập tên đăng nhập"
+                placeholder={t("auth.emailPlaceholder")}
                 required
                 className="bg-transparent border-none focus-visible:ring-0 shadow-none p-0 h-full w-full font-sans text-[14px] text-foreground placeholder:text-muted-foreground/40"
               />
@@ -131,7 +133,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
                   if (emailTouched) setEmailTouched(false) // clear error while typing, re-evaluate on blur
                 }}
                 onBlur={() => setEmailTouched(true)}
-                placeholder="Nhập email của bạn"
+                placeholder={t("auth.emailPlaceholder")}
                 required
                 className="bg-transparent border-none focus-visible:ring-0 shadow-none p-0 h-full w-full font-sans text-[14px] text-foreground placeholder:text-muted-foreground/40"
               />
@@ -149,7 +151,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
           {/* Mật khẩu */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Mật khẩu
+              {t("auth.passwordLabel")}
             </Label>
             <div className="glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200">
               <Lock className="text-muted-foreground size-5 shrink-0" />
@@ -165,7 +167,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center cursor-pointer"
               >
                 {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
               </button>
@@ -175,7 +177,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
           {/* Xác nhận mật khẩu */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="confirm_password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Xác nhận mật khẩu
+              {t("auth.confirmPasswordLabel")}
             </Label>
             <div 
               className={`glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200 ${
@@ -199,7 +201,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center cursor-pointer"
               >
                 {showConfirmPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
               </button>
@@ -216,7 +218,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
             type="submit"
             className="w-full h-12 mt-2 rounded-full bg-[#2e5d97] hover:bg-[#214874] text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer"
           >
-            Tạo tài khoản
+            {t("auth.registerButton")}
             <ArrowRight className="size-4 shrink-0" />
           </button>
         </form>
@@ -226,13 +228,13 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
           <div className="flex items-center gap-3">
             <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
             <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-              hoặc
+              {t("common.or") || "or"}
             </span>
             <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
           </div>
           <div className="text-center">
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              Đã có tài khoản?{" "}
+              {t("auth.haveAccount")}{" "}
               <a
                 href="#"
                 onClick={(e) => {
@@ -241,7 +243,7 @@ export function Register({ onNavigateToLogin }: RegisterProps) {
                 }}
                 className="font-semibold text-primary hover:text-primary-hover transition-colors underline decoration-primary/30 hover:decoration-primary underline-offset-4"
               >
-                Đăng nhập
+                {t("auth.loginNow")}
               </a>
             </p>
           </div>

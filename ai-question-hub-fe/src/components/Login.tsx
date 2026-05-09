@@ -3,6 +3,7 @@ import { BrainCircuit, Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useTranslation } from "react-i18next"
 
 interface LoginProps {
   onNavigateToRegister: () => void
@@ -10,6 +11,7 @@ interface LoginProps {
 }
 
 export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
+  const { t } = useTranslation()
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [remember, setRemember] = React.useState(false)
@@ -21,7 +23,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
     if (onLoginSuccess) {
       onLoginSuccess()
     } else {
-      alert(`Đăng nhập thành công với: ${email}`)
+      alert(`${t("auth.loginSuccess")} ${email}`)
     }
   }
 
@@ -41,10 +43,10 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
         {/* Title & Description */}
         <div>
           <h2 className="text-[26px] font-bold tracking-[-0.4px] text-foreground mb-1 font-sans">
-            Đăng nhập
+            {t("auth.loginTitle")}
           </h2>
           <p className="text-[14px] text-muted-foreground font-sans">
-            Chào mừng trở lại!
+            {t("auth.loginWelcome")}
           </p>
         </div>
 
@@ -53,7 +55,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
           {/* Email Input */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Email hoặc tên đăng nhập
+              {t("auth.emailLabel")}
             </Label>
             <div className="glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200">
               <Mail className="text-muted-foreground size-5 shrink-0" />
@@ -62,7 +64,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Nhập email của bạn"
+                placeholder={t("auth.emailPlaceholder")}
                 required
                 className="bg-transparent border-none focus-visible:ring-0 shadow-none p-0 h-full w-full font-sans text-[14px] text-foreground placeholder:text-muted-foreground/40"
               />
@@ -72,7 +74,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
           {/* Password Input */}
           <div className="flex flex-col gap-2">
             <Label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Mật khẩu
+              {t("auth.passwordLabel")}
             </Label>
             <div className="glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200">
               <Lock className="text-muted-foreground size-5 shrink-0" />
@@ -88,7 +90,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center cursor-pointer"
               >
                 {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
               </button>
@@ -107,14 +109,14 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
                 htmlFor="remember"
                 className="text-sm font-normal text-slate-600 dark:text-slate-400 group-hover:text-foreground transition-colors cursor-pointer"
               >
-                Ghi nhớ đăng nhập
+                {t("auth.rememberMe")}
               </Label>
             </label>
             <a
               href="#"
               className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
             >
-              Quên mật khẩu?
+              {t("auth.forgotPassword")}
             </a>
           </div>
 
@@ -123,7 +125,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
             type="submit"
             className="w-full h-12 mt-2 rounded-full bg-[#2e5d97] hover:bg-[#214874] text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center cursor-pointer"
           >
-            Đăng nhập
+            {t("auth.loginButton")}
           </button>
         </form>
 
@@ -132,13 +134,13 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
           <div className="flex items-center gap-3">
             <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
             <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-              hoặc
+              {t("common.or") || "or"}
             </span>
             <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
           </div>
           <div className="text-center">
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              Chưa có tài khoản?{" "}
+              {t("auth.noAccount")}{" "}
               <a
                 href="#"
                 onClick={(e) => {
@@ -147,7 +149,7 @@ export function Login({ onNavigateToRegister, onLoginSuccess }: LoginProps) {
                 }}
                 className="font-semibold text-primary hover:text-primary-hover transition-colors underline decoration-primary/30 hover:decoration-primary underline-offset-4"
               >
-                Đăng ký ngay
+                {t("auth.registerNow")}
               </a>
             </p>
           </div>

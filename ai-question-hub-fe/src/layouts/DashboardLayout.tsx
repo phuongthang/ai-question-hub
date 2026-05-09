@@ -19,6 +19,8 @@ import {
 } from "lucide-react"
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { useTranslation } from "react-i18next"
+import { ThemeToggle, LanguageToggle } from "../components/Toggles"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -33,6 +35,7 @@ export function DashboardLayout({
   setActiveMenu,
   onLogout
 }: DashboardLayoutProps) {
+  const { t } = useTranslation()
   const [searchQuery, setSearchQuery] = React.useState("")
   const [isCollapsed, setIsCollapsed] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
@@ -65,13 +68,13 @@ export function DashboardLayout({
   }, [])
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "projects", label: "Projects", icon: Folder },
-    { id: "questions", label: "My Questions", icon: HelpCircle },
-    { id: "generate", label: "AI Generate", icon: Sparkles },
-    { id: "topics", label: "Topics", icon: ListTodo },
-    { id: "models", label: "AI Models", icon: Cpu },
-    { id: "users", label: "Users", icon: Users },
+    { id: "dashboard", label: t("sidebar.dashboard"), icon: LayoutDashboard },
+    { id: "projects", label: t("sidebar.projects"), icon: Folder },
+    { id: "questions", label: t("sidebar.questions"), icon: HelpCircle },
+    { id: "generate", label: t("sidebar.generate"), icon: Sparkles },
+    { id: "topics", label: t("sidebar.topics"), icon: ListTodo },
+    { id: "models", label: t("sidebar.models"), icon: Cpu },
+    { id: "users", label: t("sidebar.users"), icon: Users },
   ]
 
   // Sidebar is fully open if not collapsed, or if collapsed but currently hovered
@@ -104,7 +107,7 @@ export function DashboardLayout({
             <BrainCircuit className="text-white size-6" />
           </div>
           <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100 max-w-[150px] ml-1" : "opacity-0 max-w-0 ml-0"}`}>
-            <span className="font-semibold text-base text-[#2e5d97] dark:text-blue-400 tracking-tight leading-none whitespace-nowrap">Workspace</span>
+            <span className="font-semibold text-base text-[#2e5d97] dark:text-blue-400 tracking-tight leading-none whitespace-nowrap">{t("common.workspace")}</span>
             <span className="text-xs text-slate-500 font-medium mt-1 whitespace-nowrap">AI Question Pro</span>
           </div>
         </div>
@@ -145,11 +148,11 @@ export function DashboardLayout({
                 ? "bg-[#2e5d97] text-white"
                 : "text-slate-600 dark:text-slate-400 hover:bg-[#2e5d97]/10 dark:hover:bg-slate-800/60 hover:translate-x-0.5"
             }`}
-            title={!showFullText ? "Settings" : undefined}
+            title={!showFullText ? t("sidebar.settings") : undefined}
           >
             <Settings className="size-5 shrink-0 text-slate-500" />
             <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
-              Settings
+              {t("sidebar.settings")}
             </span>
           </button>
         </div>
@@ -164,7 +167,7 @@ export function DashboardLayout({
             </Avatar>
             <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
               <span className="font-semibold text-sm leading-none text-slate-900 dark:text-white whitespace-nowrap">Nguyễn Thắng</span>
-              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">Admin</span>
+              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">{t("common.admin")}</span>
             </div>
           </div>
 
@@ -174,11 +177,11 @@ export function DashboardLayout({
             className={`flex items-center text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-300 font-semibold text-sm cursor-pointer overflow-hidden w-full h-10 px-4 ${
               showFullText ? "gap-3" : "gap-0"
             }`}
-            title={!showFullText ? "Logout" : undefined}
+            title={!showFullText ? t("sidebar.logout") : undefined}
           >
             <LogOut className="size-4 shrink-0" />
             <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
-              Logout
+              {t("sidebar.logout")}
             </span>
           </button>
         </div>
@@ -210,7 +213,7 @@ export function DashboardLayout({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search projects, questions..."
+                placeholder={t("common.searchPlaceholder")}
                 className="w-full h-10 pl-10 pr-4 rounded-full bg-white/60 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/50 focus:outline-none focus:border-[#2e5d97] focus:ring-1 focus:ring-[#2e5d97] text-sm text-slate-800 dark:text-white placeholder:text-slate-400 transition-all"
               />
             </div>
@@ -218,7 +221,9 @@ export function DashboardLayout({
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <button className="relative p-2 rounded-full hover:bg-white/60 dark:hover:bg-slate-800/60 text-slate-600 dark:text-slate-400 transition-all">
+            <LanguageToggle />
+            <ThemeToggle />
+            <button className="relative p-2 rounded-full hover:bg-white/60 dark:hover:bg-slate-800/60 text-slate-600 dark:text-slate-400 transition-all" title={t("common.notifications") || "Notifications"}>
               <Bell className="size-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             </button>
