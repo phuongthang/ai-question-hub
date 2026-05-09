@@ -1,0 +1,4 @@
+flyway.url=jdbc:postgresql://localhost:5432/ai_question_hub
+flyway.user=aiquestionhub
+flyway.password=aiquestionhub
+flyway.locations=filesystem:src/main/resources/db/migrations
