@@ -68,8 +68,72 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-ink: #0F172A;
+  --color-ink-secondary: #334155;
+  --color-ink-muted: #64748B;
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  
+  /* Typography scale from template */
+  --text-hero: 32px;
+  --text-hero--line-height: 1.15;
+  --text-hero--letter-spacing: -0.5px;
+  --text-hero--font-weight: 700;
+
+  --text-display-lg: 26px;
+  --text-display-lg--line-height: 1.20;
+  --text-display-lg--letter-spacing: -0.4px;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-md: 22px;
+  --text-display-md--line-height: 1.25;
+  --text-display-md--letter-spacing: -0.3px;
+  --text-display-md--font-weight: 600;
+
+  --text-display-sm: 18px;
+  --text-display-sm--line-height: 1.30;
+  --text-display-sm--letter-spacing: -0.2px;
+  --text-display-sm--font-weight: 600;
+
+  --text-stat: 28px;
+  --text-stat--line-height: 1.10;
+  --text-stat--letter-spacing: -0.5px;
+  --text-stat--font-weight: 700;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 1.60;
+  --text-body-lg--letter-spacing: 0;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-medium: 14px;
+  --text-body-medium--line-height: 1.57;
+  --text-body-medium--letter-spacing: 0;
+  --text-body-medium--font-weight: 500;
+
+  --text-body-strong: 14px;
+  --text-body-strong--line-height: 1.57;
+  --text-body-strong--letter-spacing: 0;
+  --text-body-strong--font-weight: 600;
+
+  --text-body: 14px;
+  --text-body--line-height: 1.57;
+  --text-body--letter-spacing: 0;
+  --text-body--font-weight: 400;
+
+  --text-caption: 12px;
+  --text-caption--line-height: 1.50;
+  --text-caption--letter-spacing: 0.1px;
+  --text-caption--font-weight: 400;
+
+  --text-caption-strong: 12px;
+  --text-caption-strong--line-height: 1.50;
+  --text-caption-strong--letter-spacing: 0.1px;
+  --text-caption-strong--font-weight: 600;
+
+  --text-nav: 13px;
+  --text-nav--line-height: 1.0;
+  --text-nav--letter-spacing: 0;
+  --text-nav--font-weight: 500;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);

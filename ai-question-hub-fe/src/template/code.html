@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Question Generator - Register</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "glass-border-subtle": "rgba(148, 163, 184, 0.20)",
+                        "accent-teal": "#B1C9EF",
+                        "surface-tint": "#30609a",
+                        "secondary-light": "rgba(138, 174, 224, 0.12)",
+                        "tertiary-container": "#966d0e",
+                        "secondary": "#3b608d",
+                        "accent-teal-light": "rgba(177, 201, 239, 0.12)",
+                        "secondary-fixed": "#d3e4ff",
+                        "surface-container": "#ededf3",
+                        "hero-start": "#395886",
+                        "inverse-on-surface": "#f0f0f6",
+                        "on-surface": "#1a1c20",
+                        "surface": "#f9f9fe",
+                        "primary-container": "#4976b1",
+                        "primary-fixed-dim": "#a5c8ff",
+                        "outline": "#737781",
+                        "ink-secondary": "#334155",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#214874",
+                        "background": "#f9f9fe",
+                        "on-secondary-fixed": "#001c38",
+                        "outline-variant": "#c2c6d1",
+                        "on-secondary-container": "#305683",
+                        "ink-on-dark": "#F8FAFC",
+                        "on-background": "#1a1c20",
+                        "accent-amber": "#F59E0B",
+                        "on-error-container": "#93000a",
+                        "ink-muted": "#64748B",
+                        "tertiary": "#785600",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-bright": "#f9f9fe",
+                        "glass-border": "rgba(255, 255, 255, 0.35)",
+                        "primary-light": "rgba(98, 142, 203, 0.12)",
+                        "secondary-fixed-dim": "#a5c9fc",
+                        "on-primary-fixed-variant": "#0f4780",
+                        "tertiary-fixed-dim": "#f1bf5d",
+                        "surface-variant": "#e2e2e7",
+                        "surface-dim": "#d9dadf",
+                        "surface-container-high": "#e8e8ed",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#a5c8ff",
+                        "bg-gradient-dark": "linear-gradient(135deg, #395886 0%, #243558 100%)",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5e4200",
+                        "glass-white-heavy": "rgba(255, 255, 255, 0.85)",
+                        "surface-container-low": "#f3f3f9",
+                        "on-tertiary-fixed": "#271900",
+                        "hero-end": "#243558",
+                        "accent-coral": "#E45B76",
+                        "accent-emerald": "#10B981",
+                        "secondary-container": "#a7ccff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e2e2e7",
+                        "bg-base": "#F0F3FA",
+                        "glass-white": "rgba(255, 255, 255, 0.70)",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2e3035",
+                        "bg-gradient": "linear-gradient(135deg, #D5DEEF 0%, #F0F3FA 100%)",
+                        "primary": "#2e5d97",
+                        "ink": "#0F172A",
+                        "on-primary-container": "#fefcff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-hover": "#395886",
+                        "on-surface-variant": "#424750",
+                        "tertiary-fixed": "#ffdea6",
+                        "on-primary-fixed": "#001c3a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "xl": "32px",
+                        "card-padding-sm": "16px",
+                        "md": "16px",
+                        "section": "64px",
+                        "xxl": "48px",
+                        "grid-gap": "16px",
+                        "xxs": "4px",
+                        "lg": "24px",
+                        "page-padding": "24px",
+                        "card-padding": "20px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "caption-strong": ["Inter"],
+                        "body-strong": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-sm": ["Inter"],
+                        "hero": ["Inter"],
+                        "body-medium": ["Inter"],
+                        "display-md": ["Inter"],
+                        "stat": ["Inter"],
+                        "caption": ["Inter"],
+                        "nav": ["Inter"],
+                        "body": ["Inter"],
+                        "mono": ["JetBrains Mono"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption-strong": ["12px", { "lineHeight": "1.50", "letterSpacing": "0.1px", "fontWeight": "600" }],
+                        "body-strong": ["14px", { "lineHeight": "1.57", "letterSpacing": "0", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.60", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-sm": ["18px", { "lineHeight": "1.30", "letterSpacing": "-0.2px", "fontWeight": "600" }],
+                        "hero": ["32px", { "lineHeight": "1.15", "letterSpacing": "-0.5px", "fontWeight": "700" }],
+                        "body-medium": ["14px", { "lineHeight": "1.57", "letterSpacing": "0", "fontWeight": "500" }],
+                        "display-md": ["22px", { "lineHeight": "1.25", "letterSpacing": "-0.3px", "fontWeight": "600" }],
+                        "stat": ["28px", { "lineHeight": "1.10", "letterSpacing": "-0.5px", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "1.50", "letterSpacing": "0.1px", "fontWeight": "400" }],
+                        "nav": ["13px", { "lineHeight": "1.0", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body": ["14px", { "lineHeight": "1.57", "letterSpacing": "0", "fontWeight": "400" }],
+                        "mono": ["13px", { "lineHeight": "1.50", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-lg": ["26px", { "lineHeight": "1.20", "letterSpacing": "-0.4px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #D5DEEF 0%, #F0F3FA 100%);
+        }
+        .blob-1 {
+            background: rgba(98, 142, 203, 0.4);
+            filter: blur(80px);
+        }
+        .blob-2 {
+            background: rgba(138, 174, 224, 0.3);
+            filter: blur(80px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-custom min-h-screen flex items-center justify-center relative overflow-hidden font-body text-body text-on-surface">
+<!-- Decorative Blobs -->
+<div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blob-1 -translate-y-1/4 translate-x-1/4 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blob-2 translate-y-1/4 -translate-x-1/4 pointer-events-none"></div>
+<!-- Registration Card -->
+<div class="glass-card rounded-[24px] w-full max-w-[480px] p-xl shadow-lg relative z-10 m-page-padding">
+<!-- Header -->
+<div class="text-center mb-xl">
+<div class="inline-flex items-center justify-center gap-xs mb-sm">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-lg">psychology</span>
+</div>
+<span class="font-display-sm text-display-sm text-primary">AI Q-Gen</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-ink mb-xxs">Tạo tài khoản</h1>
+<p class="font-body text-body text-ink-muted">Tham gia để quản lý dự án &amp; sinh câu hỏi bằng AI</p>
+</div>
+<!-- Form -->
+<form class="space-y-md">
+<div class="space-y-xxs">
+<label class="font-body-strong text-body-strong text-ink-secondary block" for="fullName">Full name</label>
+<input class="w-full bg-glass-white/80 border border-glass-border-subtle rounded-lg px-md py-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary-light transition-all backdrop-blur-md" id="fullName" placeholder="Nguyen Van A" type="text"/>
+</div>
+<div class="space-y-xxs">
+<label class="font-body-strong text-body-strong text-ink-secondary block" for="username">Username</label>
+<input class="w-full bg-glass-white/80 border border-glass-border-subtle rounded-lg px-md py-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary-light transition-all backdrop-blur-md" id="username" placeholder="nguyenvana" type="text"/>
+</div>
+<div class="space-y-xxs">
+<label class="font-body-strong text-body-strong text-ink-secondary block" for="email">Email</label>
+<input class="w-full bg-glass-white/80 border border-error rounded-lg px-md py-sm focus:outline-none focus:ring-1 focus:ring-error-container transition-all backdrop-blur-md text-error" id="email" placeholder="nguyenvana@example.com" type="email" value="invalid-email"/>
+<p class="font-caption text-caption text-error flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                    Email không hợp lệ
+                </p>
+</div>
+<div class="space-y-xxs">
+<label class="font-body-strong text-body-strong text-ink-secondary block" for="password">Password</label>
+<div class="relative">
+<input class="w-full bg-glass-white/80 border border-glass-border-subtle rounded-lg px-md py-sm pr-10 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary-light transition-all backdrop-blur-md" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="space-y-xxs">
+<label class="font-body-strong text-body-strong text-ink-secondary block" for="confirmPassword">Confirm password</label>
+<div class="relative">
+<input class="w-full bg-glass-white/80 border border-glass-border-subtle rounded-lg px-md py-sm pr-10 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary-light transition-all backdrop-blur-md" id="confirmPassword" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-hover text-white font-body-strong text-body-strong rounded-full py-sm px-xl shadow-[0_4px_14px_0_rgba(98,142,203,0.39)] hover:shadow-[0_6px_20px_rgba(98,142,203,0.23)] hover:-translate-y-[1px] active:scale-[0.98] transition-all duration-200 mt-md" type="submit">
+                Đăng ký
+            </button>
+</form>
+<!-- Footer -->
+<div class="mt-lg text-center">
+<div class="relative flex py-sm items-center mb-sm">
+<div class="flex-grow border-t border-glass-border-subtle"></div>
+<span class="flex-shrink-0 mx-4 font-caption text-caption text-ink-muted">hoặc</span>
+<div class="flex-grow border-t border-glass-border-subtle"></div>
+</div>
+<p class="font-body text-body text-ink-secondary">
+                Đã có tài khoản? 
+                <a class="font-body-strong text-body-strong text-primary hover:text-primary-hover hover:underline transition-colors" href="#">Đăng nhập</a>
+</p>
+</div>
+</div>
+</body></html>

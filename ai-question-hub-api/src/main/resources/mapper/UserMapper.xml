@@ -62,6 +62,7 @@
             full_name    = #{fullName},
             avatar_url   = #{avatarUrl},
             phone_number = #{phoneNumber},
+            role         = #{role},
             updated_at   = CURRENT_TIMESTAMP,
             updated_by   = #{updatedBy}
         WHERE id = #{id}

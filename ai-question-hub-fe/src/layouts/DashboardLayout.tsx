@@ -101,7 +101,7 @@ export function DashboardLayout({
   const translatedRole = userRole ? t(UserRoleLabelMap[userRole] || "") : ""
 
   return (
-    <div className="min-h-screen text-slate-900 flex font-sans antialiased bg-background w-full">
+    <div className="h-screen text-slate-900 flex font-sans antialiased bg-background w-full overflow-hidden">
       {/* Decorative Blur Blobs for background depth */}
       <div className="fixed top-20 left-10 w-[500px] h-[500px] blob-indigo rounded-full blur-[100px] opacity-30 pointer-events-none z-0"></div>
       <div className="fixed bottom-10 right-10 w-[400px] h-[400px] blob-teal rounded-full blur-[80px] opacity-20 pointer-events-none z-0"></div>
@@ -195,7 +195,7 @@ export function DashboardLayout({
       </nav>
 
       {/* Main Content Area with transition and dynamic margins */}
-      <main className={`flex-1 ${mainMarginClass} flex flex-col min-h-screen relative z-10 transition-all duration-300 ease-in-out`}>
+      <main className={`flex-1 ${mainMarginClass} flex flex-col h-screen relative z-10 transition-all duration-300 ease-in-out`}>
         {/* Top Header Navigation */}
         <header className="h-16 flex items-center justify-between px-6 bg-white/40 dark:bg-slate-950/30 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 sticky top-0 z-30">
           {/* Breadcrumbs with Collapse Button */}
@@ -244,7 +244,7 @@ export function DashboardLayout({
         </header>
 
         {/* Content Children */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto">
           {children || <Outlet />}
         </div>
       </main>
