@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.auth.repository.AuthTokenRepository">
+<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.repository.AuthTokenRepository">
 
-    <resultMap id="AuthTokenResultMap" type="com.aiquestionhub.aiquestionhubapi.api.auth.model.AuthToken">
+    <resultMap id="AuthTokenResultMap" type="com.aiquestionhub.aiquestionhubapi.api.model.AuthToken">
         <id property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="token" column="token"/>
@@ -12,10 +12,10 @@
         <result property="createdAt" column="created_at"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.auth.model.AuthToken"
+    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.AuthToken"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO auth_tokens (user_id, token, expires_at, revoked, created_at)
-        VALUES (#{userId}, #{token}, #{expiresAt}, #{revoked}, #{createdAt})
+        VALUES (#{userId}, #{token}, #{expiresAt}, #{revoked}, CURRENT_TIMESTAMP)
     </insert>
 
     <select id="findByToken" resultMap="AuthTokenResultMap">

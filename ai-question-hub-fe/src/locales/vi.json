@@ -28,6 +28,8 @@
     "registerWelcome": "Tạo tài khoản mới và bắt đầu ngay",
     "fullNameLabel": "Họ và tên:",
     "fullNamePlaceholder": "Nhập họ và tên của bạn",
+    "phoneNumberLabel": "Số điện thoại:",
+    "phoneNumberPlaceholder": "Nhập số điện thoại của bạn",
     "confirmPasswordLabel": "Xác nhận mật khẩu:",
     "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
     "agreeToTerms": "Tôi đồng ý với các Điều khoản & Chính sách",
@@ -55,7 +57,13 @@
     "passwordRequired": "Vui lòng nhập mật khẩu.",
     "fullNameRequired": "Vui lòng nhập họ và tên.",
     "usernameRequired": "Vui lòng nhập tên đăng nhập.",
+    "phoneNumberRequired": "Vui lòng nhập số điện thoại.",
+    "phoneNumberInvalid": "Số điện thoại không hợp lệ.",
     "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu.",
     "passwordMismatch": "Mật khẩu xác nhận không khớp."
+  },
+  "roles": {
+    "admin": "Quản trị viên",
+    "user": "Người dùng"
   }
 }

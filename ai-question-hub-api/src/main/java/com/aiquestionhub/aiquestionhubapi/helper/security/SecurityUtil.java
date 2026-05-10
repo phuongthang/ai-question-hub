@@ -1,7 +1,7 @@
 package com.aiquestionhub.aiquestionhubapi.helper.security;
 
-import com.aiquestionhub.aiquestionhubapi.api.user.model.User;
-import com.aiquestionhub.aiquestionhubapi.api.user.repository.UserRepository;
+import com.aiquestionhub.aiquestionhubapi.api.model.User;
+import com.aiquestionhub.aiquestionhubapi.api.repository.UserRepository;
 import com.aiquestionhub.aiquestionhubapi.helper.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

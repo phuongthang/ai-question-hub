@@ -1,7 +1,7 @@
 package com.aiquestionhub.aiquestionhubapi.security;
 
-import com.aiquestionhub.aiquestionhubapi.api.auth.model.AuthToken;
-import com.aiquestionhub.aiquestionhubapi.api.auth.repository.AuthTokenRepository;
+import com.aiquestionhub.aiquestionhubapi.api.model.AuthToken;
+import com.aiquestionhub.aiquestionhubapi.api.repository.AuthTokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

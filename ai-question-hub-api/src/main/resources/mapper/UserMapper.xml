@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.user.repository.UserRepository">
+<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.repository.UserRepository">
 
-    <resultMap id="UserResultMap" type="com.aiquestionhub.aiquestionhubapi.api.user.model.User">
+    <resultMap id="UserResultMap" type="com.aiquestionhub.aiquestionhubapi.api.model.User">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="userCode" column="user_code"/>
@@ -48,13 +48,13 @@
         SELECT * FROM users WHERE user_code = #{code} AND deleted_at IS NULL
     </select>
 
-    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.user.model.User"
+    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.User"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users (username, user_code, email, password, full_name, avatar_url, phone_number, created_at, created_by)
-        VALUES (#{username}, #{userCode}, #{email}, #{password}, #{fullName}, #{avatarUrl}, #{phoneNumber}, #{createdAt}, #{createdBy})
+        VALUES (#{username}, #{userCode}, #{email}, #{password}, #{fullName}, #{avatarUrl}, #{phoneNumber}, CURRENT_TIMESTAMP, #{createdBy})
     </insert>
 
-    <update id="update" parameterType="com.aiquestionhub.aiquestionhubapi.api.user.model.User">
+    <update id="update" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.User">
         UPDATE users
         SET username     = #{username},
             email        = #{email},
@@ -62,7 +62,7 @@
             full_name    = #{fullName},
             avatar_url   = #{avatarUrl},
             phone_number = #{phoneNumber},
-            updated_at   = #{updatedAt},
+            updated_at   = CURRENT_TIMESTAMP,
             updated_by   = #{updatedBy}
         WHERE id = #{id}
           AND deleted_at IS NULL

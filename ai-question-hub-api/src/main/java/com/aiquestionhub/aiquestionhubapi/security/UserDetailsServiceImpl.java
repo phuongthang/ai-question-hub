@@ -1,7 +1,7 @@
 package com.aiquestionhub.aiquestionhubapi.security;
 
-import com.aiquestionhub.aiquestionhubapi.api.user.model.User;
-import com.aiquestionhub.aiquestionhubapi.api.user.repository.UserRepository;
+import com.aiquestionhub.aiquestionhubapi.api.model.User;
+import com.aiquestionhub.aiquestionhubapi.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

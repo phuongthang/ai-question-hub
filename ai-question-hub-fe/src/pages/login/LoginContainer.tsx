@@ -1,48 +1,57 @@
 import { useForm, FormProvider } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useNavigate } from "react-router-dom"
-import { useTranslation } from "react-i18next"
 import { loginSchema, type LoginInput } from "@/schemas/auth"
 import { useAuthStore } from "@/stores/authStore"
 import { LoginPage } from "./LoginPage"
 import { LoginContext } from "@/contexts/LoginContext"
+import { useLoginMutation } from "@/api/auth"
+import { useState } from "react"
+import type { UserRoleType } from "@/constants/roles"
 
-interface LoginContainerProps {
-  onLoginSuccess?: () => void
-}
-
-export function LoginContainer({ onLoginSuccess }: LoginContainerProps) {
-  const { t } = useTranslation()
+export function LoginContainer() {
   const navigate = useNavigate()
   const login = useAuthStore((state) => state.login)
+  const loginMutation = useLoginMutation()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const methods = useForm<LoginInput>({
     mode: "onBlur",
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
       remember: false,
     },
   })
 
   const onSubmit = (data: LoginInput) => {
-    console.log("Đăng nhập thành công với dữ liệu:", data)
-    login(data.email)
-    if (onLoginSuccess) {
-      onLoginSuccess()
-    } else {
-      alert(`${t("auth.loginSuccess")} ${data.email}`)
-      navigate("/dashboard")
-    }
+    setErrorMessage(null)
+    loginMutation.mutate(data, {
+      onSuccess: (res) => {
+        login(res.accessToken, {
+          name: res.user.fullName,
+          role: res.user.role as unknown as UserRoleType,
+          avatar: res.user.avatarUrl || "",
+          userCode: res.user.userCode,
+          email: res.user.email,
+          username: res.user.username,
+          phoneNumber: res.user.phoneNumber,
+        })
+        navigate("/dashboard")
+      },
+      onError: (err: any) => {
+        setErrorMessage(err.message)
+      },
+    })
   }
 
   return (
     <FormProvider {...methods}>
-      <LoginContext.Provider value={{ onSubmit }}>
+      <LoginContext.Provider value={{ onSubmit, errorMessage, isLoading: loginMutation.isPending }}>
         <LoginPage />
       </LoginContext.Provider>
     </FormProvider>
   )
 }
-
+export default LoginContainer

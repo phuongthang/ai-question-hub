@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { registerSchema, type RegisterInput } from "@/schemas/auth"
 import { RegisterContext } from "@/contexts/RegisterContext"
-import RegisterPage from "./RegisterPage"
+import { RegisterPage } from "./RegisterPage"
+import { useRegisterMutation } from "@/api/auth"
+import { useState } from "react"
 
 interface RegisterContainerProps {
   onNavigateToLogin?: () => void
@@ -13,6 +15,8 @@ interface RegisterContainerProps {
 export function RegisterContainer({ onNavigateToLogin }: RegisterContainerProps) {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const registerMutation = useRegisterMutation()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const methods = useForm<RegisterInput>({
     mode: "onBlur",
@@ -21,25 +25,34 @@ export function RegisterContainer({ onNavigateToLogin }: RegisterContainerProps)
       fullname: "",
       username: "",
       email: "",
+      phoneNumber: "",
       password: "",
       confirmPassword: "",
     },
   })
 
   const onSubmit = (data: RegisterInput) => {
-    console.log("Đăng ký thành công với dữ liệu:", data)
-    alert(`${t("auth.registerSuccess")} ${data.fullname}`)
-
-    if (onNavigateToLogin) {
-      onNavigateToLogin()
-    } else {
-      navigate("/login")
-    }
+    setErrorMessage(null)
+    registerMutation.mutate(data, {
+      onSuccess: (res) => {
+        console.log("Đăng ký thành công:", res)
+        alert(`${t("auth.registerSuccess")} ${res.user.fullName}`)
+        if (onNavigateToLogin) {
+          onNavigateToLogin()
+        } else {
+          navigate("/login")
+        }
+      },
+      onError: (err: any) => {
+        console.error("Lỗi đăng ký:", err)
+        setErrorMessage(err.message || "Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.")
+      },
+    })
   }
 
   return (
     <FormProvider {...methods}>
-      <RegisterContext.Provider value={{ onSubmit }}>
+      <RegisterContext.Provider value={{ onSubmit, errorMessage, isLoading: registerMutation.isPending }}>
         <RegisterPage />
       </RegisterContext.Provider>
     </FormProvider>

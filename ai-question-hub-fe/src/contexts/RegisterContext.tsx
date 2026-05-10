@@ -3,6 +3,8 @@ import { type RegisterInput } from "@/schemas/auth"
 
 export interface RegisterContextType {
   onSubmit: (data: RegisterInput) => void
+  errorMessage?: string | null
+  isLoading?: boolean
 }
 
 export const RegisterContext = React.createContext<RegisterContextType | undefined>(undefined)

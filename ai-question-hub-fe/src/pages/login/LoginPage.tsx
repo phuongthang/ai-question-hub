@@ -1,4 +1,4 @@
-import { BrainCircuit, Mail, Lock } from "lucide-react"
+import { Lock, User, Loader2 } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -7,44 +7,36 @@ import { Controller, useFormContext } from "react-hook-form"
 import { type LoginInput } from "@/schemas/auth"
 import { FormInput } from "@/components/FormInput"
 import { useLogin } from "@/contexts/LoginContext"
+import { AuthHeader } from "@/components/AuthHeader"
 
 export function LoginPage() {
   const { t } = useTranslation()
   const { control, handleSubmit } = useFormContext<LoginInput>()
-
-  const { onSubmit } = useLogin()
+  const { onSubmit, errorMessage, isLoading } = useLogin()
 
   return (
     <div className="glass-panel w-full rounded-2xl relative overflow-hidden flex flex-col">
       <div className="p-10 flex flex-col gap-6">
-        {/* Logo Header */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl logo-gradient flex items-center justify-center shadow-sm">
-            <BrainCircuit className="text-white size-6" />
-          </div>
-          <h1 className="text-[22px] font-semibold tracking-[-0.3px] text-foreground font-sans">
-            AI Q-Gen
-          </h1>
-        </div>
+        <AuthHeader 
+          title={t("auth.loginTitle")} 
+          description={t("auth.loginWelcome")} 
+        />
 
-        {/* Title & Description */}
-        <div>
-          <h2 className="text-[26px] font-bold tracking-[-0.4px] text-foreground mb-1 font-sans">
-            {t("auth.loginTitle")}
-          </h2>
-          <p className="text-[14px] text-muted-foreground font-sans">
-            {t("auth.loginWelcome")}
-          </p>
-        </div>
+        {/* Error Alert */}
+        {errorMessage && (
+          <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm font-medium animate-in fade-in slide-in-from-top-1 duration-200">
+            {errorMessage}
+          </div>
+        )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-          {/* Email Input */}
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" autoComplete="off">
+          {/* Username Input */}
           <FormInput
-            name="email"
-            label={t("auth.emailLabel")}
-            placeholder={t("auth.emailPlaceholder")}
-            icon={Mail}
+            name="username"
+            label={t("auth.userNameLabel")}
+            placeholder={t("auth.userNamePlaceholder")}
+            icon={User}
           />
 
           {/* Password Input */}
@@ -88,9 +80,11 @@ export function LoginPage() {
           {/* Action Button */}
           <button
             type="submit"
-            className="w-full h-12 mt-2 rounded-full bg-[#2e5d97] hover:bg-[#214874] text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center cursor-pointer"
+            disabled={isLoading}
+            className="w-full h-12 mt-4 rounded-full bg-[#2e5d97] hover:bg-[#214874] disabled:bg-[#2e5d97]/60 text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] disabled:translate-y-0 hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed"
           >
-            {t("auth.loginButton")}
+            {isLoading && <Loader2 className="size-4 animate-spin" />}
+            {isLoading ? t("common.loading") : t("auth.loginButton")}
           </button>
         </form>
 
@@ -119,4 +113,4 @@ export function LoginPage() {
     </div>
   )
 }
-
+export default LoginPage

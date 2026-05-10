@@ -51,6 +51,7 @@ export function FormInput({
               className="bg-transparent border-none focus-visible:ring-0 shadow-none p-0 h-full w-full font-sans text-[14px] text-foreground placeholder:text-muted-foreground/40"
               value={field.value ?? ""}
               {...props}
+              autoComplete={props.autoComplete ?? "new-password"}
             />
           )}
         />

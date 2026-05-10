@@ -26,6 +26,8 @@
     "registerWelcome": "Create a new account and get started",
     "fullNameLabel": "Full Name",
     "fullNamePlaceholder": "Enter your full name",
+    "phoneNumberLabel": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
     "confirmPasswordLabel": "Confirm Password",
     "confirmPasswordPlaceholder": "Re-enter password",
     "agreeToTerms": "I agree to the Terms & Policies",
@@ -53,7 +55,13 @@
     "passwordRequired": "Password is required",
     "fullNameRequired": "Full name is required",
     "usernameRequired": "Username is required.",
+    "phoneNumberRequired": "Phone number is required.",
+    "phoneNumberInvalid": "Invalid phone number.",
     "confirmPasswordRequired": "Please confirm your password.",
     "passwordMismatch": "Passwords do not match."
+  },
+  "roles": {
+    "admin": "Administrator",
+    "user": "User"
   }
 }

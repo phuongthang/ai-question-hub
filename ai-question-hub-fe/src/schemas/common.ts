@@ -21,3 +21,12 @@ export const passwordSchema = z
 export const fullNameSchema = z
   .string()
   .min(1, { message: "validation.fullNameRequired" })
+
+/**
+ * Reusable schema for phone number field validation.
+ */
+export const phoneNumberSchema = z
+  .string()
+  .min(1, { message: "validation.phoneNumberRequired" })
+  .regex(/^\+?[0-9\s\-\(\)]{7,20}$/, { message: "validation.phoneNumberInvalid" })
+

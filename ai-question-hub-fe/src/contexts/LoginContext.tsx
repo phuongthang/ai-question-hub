@@ -3,6 +3,8 @@ import { type LoginInput } from "@/schemas/auth"
 
 export interface LoginContextType {
   onSubmit: (data: LoginInput) => void
+  errorMessage?: string | null
+  isLoading?: boolean
 }
 
 export const LoginContext = React.createContext<LoginContextType | undefined>(undefined)

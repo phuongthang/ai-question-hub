@@ -1,8 +1,8 @@
 import { z } from "zod"
-import { emailSchema, passwordSchema, fullNameSchema } from "./common"
+import { emailSchema, passwordSchema, fullNameSchema, phoneNumberSchema } from "./common"
 
 export const loginSchema = z.object({
-  email: emailSchema,
+  username: z.string().min(1, { message: "validation.usernameRequired" }),
   password: passwordSchema,
   remember: z.boolean().optional(),
 })
@@ -14,6 +14,7 @@ export const registerSchema = z
     fullname: fullNameSchema,
     username: z.string().min(1, { message: "validation.usernameRequired" }),
     email: emailSchema,
+    phoneNumber: phoneNumberSchema,
     password: passwordSchema,
     confirmPassword: z.string().min(1, { message: "validation.confirmPasswordRequired" }),
   })

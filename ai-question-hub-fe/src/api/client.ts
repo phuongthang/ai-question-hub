@@ -1,7 +1,7 @@
 import axios, { type AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 
-// Đọc API URL từ biến môi trường của Vite, hoặc dùng URL mặc định khi phát triển
-const BASE_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:8080/api";
+// Đọc API URL từ biến môi trường của Vite
+const BASE_URL = import.meta.env.VITE_API_URL as string;
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -52,7 +52,7 @@ apiClient.interceptors.response.use(
 
     // Thiết lập cấu trúc lỗi đồng nhất để dễ xử lý ở catch/react-query
     const errorMessage = data?.message || error.message || "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-    
+
     // Tạo đối tượng lỗi mới chứa đầy đủ thông tin hữu ích
     const customError = {
       message: errorMessage,

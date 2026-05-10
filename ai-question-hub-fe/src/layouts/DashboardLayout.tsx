@@ -19,10 +19,11 @@ import {
 } from "lucide-react"
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom"
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { UserAvatar } from "@/components/UserAvatar"
 import { useTranslation } from "react-i18next"
 import { ThemeToggle, LanguageToggle } from "../components/Toggles"
 import { useAuthStore } from "../stores/authStore"
+import { UserRole, UserRoleLabelMap } from "@/constants/roles"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
@@ -93,10 +94,11 @@ export function DashboardLayout({
 
   const mainMarginClass = isCollapsed ? "md:ml-20" : "md:ml-64"
 
-  const userAvatar = user?.avatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuBeh_DdUfOkeyLYccPWRR2dgrQpb7d12vuoIti1h8RwhuHJig5rnJUX-S5rQf9bAj3oVmqHjLK8dfIdW_5GKDaLaMikR06lazODXrbELXk-iGjWMv9qB9cjmfplgGAj1rCNv_x7L7ctB-Gm4h2vCZjWfrEjpOOYxjHBt8LWCtIj7OHuCe-hYJC-GUz3yA0WpdgL4K8bl7aRmILjG01T-pV785Xj9Y9iaLVKSQOvnN1fV8ZdMWfo1Vh3oRp94KE7WJPnTdPNjs4mxtw"
-  const userName = user?.name || "Nguyễn Thắng"
-  const userFallback = userName.substring(0, 2).toUpperCase()
-  const userRole = user?.role || "common.admin"
+  const userAvatar = user?.avatar || ""
+  const userName = user?.name || ""
+  const userCode = user?.userCode
+  const userRole = user?.role || UserRole.USER
+  const translatedRole = userRole ? t(UserRoleLabelMap[userRole] || "") : ""
 
   return (
     <div className="min-h-screen text-slate-900 flex font-sans antialiased bg-background w-full">
@@ -130,13 +132,11 @@ export function DashboardLayout({
               <Link
                 key={item.id}
                 to={`/${item.id}`}
-                className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden ${
-                  showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
-                } ${
-                  isActive
+                className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden ${showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
+                  } ${isActive
                     ? "bg-[#2e5d97] text-white shadow-[0_2px_8px_rgba(46,93,151,0.2)]"
                     : "text-slate-600 dark:text-slate-400 hover:bg-[#2e5d97]/10 dark:hover:bg-slate-800/60 hover:translate-x-0.5"
-                }`}
+                  }`}
                 title={!showFullText ? item.label : undefined}
               >
                 <Icon className={`size-5 shrink-0 ${isActive ? "text-white" : "text-slate-500"}`} />
@@ -150,13 +150,11 @@ export function DashboardLayout({
           {/* Settings at the bottom of list */}
           <Link
             to="/settings"
-            className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden mt-auto ${
-              showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
-            } ${
-              activeMenu === "settings"
+            className={`flex items-center w-full h-10 rounded-lg font-medium text-sm transition-all duration-300 cursor-pointer overflow-hidden mt-auto ${showFullText ? "px-4 gap-3" : "px-[18px] gap-0"
+              } ${activeMenu === "settings"
                 ? "bg-[#2e5d97] text-white"
                 : "text-slate-600 dark:text-slate-400 hover:bg-[#2e5d97]/10 dark:hover:bg-slate-800/60 hover:translate-x-0.5"
-            }`}
+              }`}
             title={!showFullText ? t("sidebar.settings") : undefined}
           >
             <Settings className="size-5 shrink-0 text-slate-500" />
@@ -169,21 +167,23 @@ export function DashboardLayout({
         {/* Admin profile and Logout */}
         <div className="px-4 mt-6 pt-4 border-t border-slate-200/50 dark:border-slate-800/50 flex flex-col transition-all duration-300">
           <div className={`flex items-center w-full transition-all duration-300 mb-4 overflow-hidden ${showFullText ? "px-2 gap-3" : "px-[6px] gap-0"}`}>
-            <Avatar className="size-9 ring-2 ring-[#2e5d97]/10 shrink-0" title={!showFullText ? `${userName} (${t(userRole)})` : undefined}>
-              <AvatarImage src={userAvatar} alt={userName} />
-              <AvatarFallback>{userFallback}</AvatarFallback>
-            </Avatar>
-            <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
+            <UserAvatar
+              className="size-9 ring-2 ring-[#2e5d97]/10 shrink-0"
+              title={!showFullText ? `${userName} (${translatedRole})` : undefined}
+              src={userAvatar}
+              name={userName}
+              userCode={userCode}
+            />
+            <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100" : "opacity-0 max-w-0"}`}>
               <span className="font-semibold text-sm leading-none text-slate-900 dark:text-white whitespace-nowrap">{userName}</span>
-              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">{t(userRole)}</span>
+              <span className="text-[11px] text-slate-500 mt-1 whitespace-nowrap">{translatedRole}</span>
             </div>
           </div>
 
           <button
             onClick={handleLogout}
-            className={`flex items-center text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-300 font-semibold text-sm cursor-pointer overflow-hidden w-full h-10 px-4 ${
-              showFullText ? "gap-3" : "gap-0"
-            }`}
+            className={`flex items-center text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-300 font-semibold text-sm cursor-pointer overflow-hidden w-full h-10 px-4 ${showFullText ? "gap-3" : "gap-0"
+              }`}
             title={!showFullText ? t("sidebar.logout") : undefined}
           >
             <LogOut className="size-4 shrink-0" />
@@ -234,10 +234,12 @@ export function DashboardLayout({
               <Bell className="size-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             </button>
-            <Avatar className="size-8 md:hidden">
-              <AvatarImage src={userAvatar} alt={userName} />
-              <AvatarFallback>{userFallback}</AvatarFallback>
-            </Avatar>
+            <UserAvatar
+              className="size-8 md:hidden"
+              src={userAvatar}
+              name={userName}
+              userCode={userCode}
+            />
           </div>
         </header>
 
