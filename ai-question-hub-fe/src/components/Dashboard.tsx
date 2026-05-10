@@ -1,13 +1,5 @@
 import * as React from "react"
-import {
-  Sparkles,
-  Cpu,
-  FolderOpen,
-  ListTodo,
-  TrendingUp,
-  Zap,
-  Bot
-} from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -40,7 +32,7 @@ export function Dashboard() {
             </div>
             <button className="h-10 px-5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/35 text-white rounded-full font-semibold flex items-center gap-2 w-max transition-all duration-200 text-sm shadow-sm cursor-pointer">
               Sinh câu hỏi ngay
-              <Sparkles className="size-3.5 text-amber-300" />
+              <Icon name="auto_awesome" className="size-3.5 text-amber-300" />
             </button>
           </div>
           {/* Glowing Ambient Background Circles */}
@@ -54,7 +46,7 @@ export function Dashboard() {
             <h2 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight">24</h2>
           </div>
           <div className="size-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-[#2e5d97] shadow-inner">
-            <FolderOpen className="size-5" />
+            <Icon name="folder_open" className="size-5" />
           </div>
         </div>
 
@@ -65,12 +57,12 @@ export function Dashboard() {
               <p className="text-xs font-bold text-slate-500 mb-1 tracking-wider uppercase">Tổng số câu hỏi</p>
               <h2 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight mb-1.5">1,248</h2>
               <Badge variant="success" className="gap-1 px-2 py-0.5 text-xs">
-                <TrendingUp className="size-3" />
+                <Icon name="trending_up" className="size-3" />
                 +12% tuần này
               </Badge>
             </div>
             <div className="size-10 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 shadow-inner">
-              <ListTodo className="size-5" />
+              <Icon name="list_alt" className="size-5" />
             </div>
           </div>
           <div className="mt-4">
@@ -134,7 +126,7 @@ export function Dashboard() {
         {/* 5. Quick Generate (4x3) with reduced border-radius (rounded-xl) */}
         <form onSubmit={handleQuickGenerate} className="md:col-span-4 md:row-span-3 bg-slate-900 text-white rounded-xl p-5 flex flex-col justify-between shadow-md border border-slate-800">
           <h3 className="font-bold text-base mb-3 flex items-center gap-2 text-blue-400 tracking-tight">
-            <Zap className="size-4 text-amber-400 fill-amber-400" />
+            <Icon name="bolt" className="size-4 text-amber-400" fill />
             Sinh nhanh
           </h3>
           <div className="flex flex-col gap-3 flex-1 mb-4">
@@ -179,7 +171,7 @@ export function Dashboard() {
             className="w-full h-9 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 text-sm shadow-sm hover:translate-y-[-0.5px] cursor-pointer"
           >
             Sinh câu hỏi
-            <Sparkles className="size-3.5" />
+            <Icon name="auto_awesome" className="size-3.5" />
           </button>
         </form>
 
@@ -270,14 +262,14 @@ export function Dashboard() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between p-2 rounded-lg bg-white/50 dark:bg-slate-900/40 border border-slate-200/30">
               <div className="flex items-center gap-2">
-                <Bot className="size-4 text-[#2e5d97]" />
+                <Icon name="smart_toy" className="size-4 text-[#2e5d97]" />
                 <span className="font-mono text-xs font-semibold text-slate-800 dark:text-white">GPT-4o</span>
               </div>
               <Badge variant="success" className="text-xs py-0 px-2">Active</Badge>
             </div>
             <div className="flex items-center justify-between p-2 rounded-lg bg-white/50 dark:bg-slate-900/40 border border-slate-200/30">
               <div className="flex items-center gap-2">
-                <Cpu className="size-4 text-violet-500" />
+                <Icon name="memory" className="size-4 text-violet-500" />
                 <span className="font-mono text-xs font-semibold text-slate-800 dark:text-white">Claude 3.5 Sonnet</span>
               </div>
               <Badge variant="draft" className="text-xs py-0 px-2">Standby</Badge>

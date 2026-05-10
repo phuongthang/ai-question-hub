@@ -1,22 +1,5 @@
 import * as React from "react"
-import {
-  BrainCircuit,
-  LayoutDashboard,
-  Folder,
-  HelpCircle,
-  Sparkles,
-  ListTodo,
-  Cpu,
-  Users,
-  Settings,
-  LogOut,
-  Home,
-  ChevronRight,
-  Search,
-  Bell,
-  PanelLeftClose,
-  PanelLeft
-} from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom"
 
 import { UserAvatar } from "@/components/UserAvatar"
@@ -68,13 +51,13 @@ export function DashboardLayout({
   }, [])
 
   const menuItems = [
-    { id: "dashboard", label: t("sidebar.dashboard"), icon: LayoutDashboard },
-    { id: "projects", label: t("sidebar.projects"), icon: Folder },
-    { id: "questions", label: t("sidebar.questions"), icon: HelpCircle },
-    { id: "generate", label: t("sidebar.generate"), icon: Sparkles },
-    { id: "topics", label: t("sidebar.topics"), icon: ListTodo },
-    { id: "models", label: t("sidebar.models"), icon: Cpu },
-    { id: "users", label: t("sidebar.users"), icon: Users },
+    { id: "dashboard", label: t("sidebar.dashboard"), icon: "dashboard" },
+    { id: "projects", label: t("sidebar.projects"), icon: "folder" },
+    { id: "questions", label: t("sidebar.questions"), icon: "help" },
+    { id: "generate", label: t("sidebar.generate"), icon: "auto_awesome" },
+    { id: "topics", label: t("sidebar.topics"), icon: "list_alt" },
+    { id: "models", label: t("sidebar.models"), icon: "memory" },
+    { id: "users", label: t("sidebar.users"), icon: "group" },
   ]
 
   const activeMenu = location.pathname.split("/")[1] || "dashboard"
@@ -101,7 +84,7 @@ export function DashboardLayout({
   const translatedRole = userRole ? t(UserRoleLabelMap[userRole] || "") : ""
 
   return (
-    <div className="h-screen text-slate-900 flex font-sans antialiased bg-background w-full overflow-hidden">
+    <div className="h-screen flex font-sans antialiased bg-page-gradient dark:bg-page-gradient text-foreground w-full overflow-hidden">
       {/* Decorative Blur Blobs for background depth */}
       <div className="fixed top-20 left-10 w-[500px] h-[500px] blob-indigo rounded-full blur-[100px] opacity-30 pointer-events-none z-0"></div>
       <div className="fixed bottom-10 right-10 w-[400px] h-[400px] blob-teal rounded-full blur-[80px] opacity-20 pointer-events-none z-0"></div>
@@ -115,7 +98,7 @@ export function DashboardLayout({
         {/* Logo and Workspace Title */}
         <div className={`w-full mb-6 flex items-center transition-all duration-300 overflow-hidden ${showFullText ? "px-4 gap-3" : "px-5 gap-0"}`}>
           <div className="w-10 h-10 rounded-lg logo-gradient flex items-center justify-center shadow-md shrink-0">
-            <BrainCircuit className="text-white size-6" />
+            <Icon name="psychology" className="text-white size-6" />
           </div>
           <div className={`flex flex-col transition-all duration-300 ease-in-out overflow-hidden ${showFullText ? "opacity-100 max-w-[150px] ml-1" : "opacity-0 max-w-0 ml-0"}`}>
             <span className="font-semibold text-base text-[#2e5d97] dark:text-blue-400 tracking-tight leading-none whitespace-nowrap">{t("common.workspace")}</span>
@@ -126,7 +109,6 @@ export function DashboardLayout({
         {/* Menu Links */}
         <div className="flex-1 overflow-y-auto px-3 flex flex-col gap-1 transition-all duration-300">
           {menuItems.map((item) => {
-            const Icon = item.icon
             const isActive = activeMenu === item.id
             return (
               <Link
@@ -139,7 +121,7 @@ export function DashboardLayout({
                   }`}
                 title={!showFullText ? item.label : undefined}
               >
-                <Icon className={`size-5 shrink-0 ${isActive ? "text-white" : "text-slate-500"}`} />
+                <Icon name={item.icon} className={`size-5 shrink-0 ${isActive ? "text-white" : "text-slate-500"}`} />
                 <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
                   {item.label}
                 </span>
@@ -157,7 +139,7 @@ export function DashboardLayout({
               }`}
             title={!showFullText ? t("sidebar.settings") : undefined}
           >
-            <Settings className="size-5 shrink-0 text-slate-500" />
+            <Icon name="settings" className="size-5 shrink-0 text-slate-500" />
             <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
               {t("sidebar.settings")}
             </span>
@@ -186,7 +168,7 @@ export function DashboardLayout({
               }`}
             title={!showFullText ? t("sidebar.logout") : undefined}
           >
-            <LogOut className="size-4 shrink-0" />
+            <Icon name="logout" className="size-4 shrink-0" />
             <span className={`transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap ${showFullText ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0"}`}>
               {t("sidebar.logout")}
             </span>
@@ -205,17 +187,17 @@ export function DashboardLayout({
               className="p-1.5 -ml-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               title={isCollapsed ? "Mở rộng thanh bên" : "Thu hẹp thanh bên"}
             >
-              {isCollapsed ? <PanelLeft className="size-5 text-[#2e5d97]" /> : <PanelLeftClose className="size-5 text-[#2e5d97]" />}
+              {isCollapsed ? <Icon name="left_panel_open" className="size-5 text-[#2e5d97]" /> : <Icon name="left_panel_close" className="size-5 text-[#2e5d97]" />}
             </button>
-            <Home className="size-4 cursor-pointer hover:text-[#2e5d97] transition-colors" />
-            <ChevronRight className="size-4 text-slate-400" />
+            <Icon name="home" className="size-4 cursor-pointer hover:text-[#2e5d97] transition-colors" />
+            <Icon name="chevron_right" className="size-4 text-slate-400" />
             <span className="text-slate-800 dark:text-white font-semibold capitalize">{activeMenu}</span>
           </div>
 
           {/* Search bar */}
           <div className="flex-1 max-w-md mx-6 hidden sm:block">
             <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+              <Icon name="search" className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
@@ -231,7 +213,7 @@ export function DashboardLayout({
             <LanguageToggle />
             <ThemeToggle />
             <button className="relative p-2 rounded-full hover:bg-white/60 dark:hover:bg-slate-800/60 text-slate-600 dark:text-slate-400 transition-all" title={t("common.notifications") || "Notifications"}>
-              <Bell className="size-5" />
+              <Icon name="notifications" className="size-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             </button>
             <UserAvatar

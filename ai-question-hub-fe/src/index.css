@@ -3,42 +3,83 @@
 @import "shadcn/tailwind.css";
 
 @font-face {
-  font-family: 'Google Sans';
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-  src: url('./assets/fonts/GoogleSans-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/MaterialSymbolsOutlined-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Google Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./assets/fonts/GoogleSans-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Google Sans';
+  font-family: 'Material Symbols Outlined';
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
-  src: url('./assets/fonts/GoogleSans-SemiBold.ttf') format('truetype');
+  src: url('./assets/fonts/MaterialSymbolsOutlined-SemiBold.ttf') format('truetype');
+}
+
+/* Material Symbols Fill class */
+.material-symbols-outlined[data-weight="fill"],
+.material-symbols-outlined.fill {
+  font-family: 'Material Symbols Outlined Filled', 'Material Symbols Outlined';
 }
 
 @font-face {
-  font-family: 'Google Sans';
+  font-family: 'Material Symbols Outlined Filled';
   font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('./assets/fonts/GoogleSans-Bold.ttf') format('truetype');
+  font-weight: 400;
+  src: url('./assets/fonts/MaterialSymbolsOutlined_Filled-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined Filled';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/MaterialSymbolsOutlined_Filled-SemiBold.ttf') format('truetype');
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Google Sans", sans-serif;
+  --font-sans: "Inter";
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -68,8 +109,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-ink: #0F172A;
-  --color-ink-secondary: #334155;
+  --color-ink: #1A1C20;
+  --color-ink-secondary: #44474F;
   --color-ink-muted: #64748B;
   --color-foreground: var(--foreground);
   --color-background: var(--background);
@@ -147,9 +188,9 @@
   /* Design.md — Glassmorphism × Bento Grid blue palette */
   /* #F0F3FA bg-base, #2e5d97 primary, #214874 primary-hover */
   --background: oklch(0.967 0.013 255); /* #F0F3FA */
-  --foreground: oklch(0.145 0.028 261); /* #0F172A ink */
+  --foreground: #1A1C20;
   --card: oklch(1 0 0); /* white glass base */
-  --card-foreground: oklch(0.145 0.028 261); /* #0F172A */
+  --card-foreground: #1A1C20;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0.028 261);
   --primary: #2e5d97; /* #2e5d97 */
@@ -249,11 +290,11 @@
   }
   
   .bg-page-gradient {
-    background: linear-gradient(135deg, #D5DEEF 0%, #F0F3FA 100%);
+    background: linear-gradient(135deg, #D5DEEF 0%, #F0F3FA 100%) fixed;
   }
 
   .dark .bg-page-gradient {
-    background: linear-gradient(135deg, #0C1322 0%, #050811 100%);
+    background: linear-gradient(135deg, #0C1322 0%, #050811 100%) fixed;
   }
 
   /* Fix autocomplete autofill solid white background in Chrome/Edge */

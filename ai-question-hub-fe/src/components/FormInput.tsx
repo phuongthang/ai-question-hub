@@ -2,13 +2,13 @@ import * as React from "react"
 import { Controller, useFormContext, useFormState } from "react-hook-form"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { Eye, EyeOff, type LucideIcon } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 import { useTranslation } from "react-i18next"
 
 interface FormInputProps extends Omit<React.ComponentProps<typeof Input>, "name"> {
   name: string
   label: string
-  icon?: LucideIcon
+  icon?: string
 }
 
 export function FormInput({
@@ -16,7 +16,7 @@ export function FormInput({
   label,
   placeholder,
   type = "text",
-  icon: Icon,
+  icon,
   className,
   ...props
 }: FormInputProps) {
@@ -38,7 +38,7 @@ export function FormInput({
         className={`glass-input h-11 rounded-lg flex items-center px-3 gap-3 transition-all duration-200 ${error ? "border-destructive/85 ring-1 ring-destructive/40" : ""
           }`}
       >
-        {Icon && <Icon className="text-muted-foreground size-5 shrink-0" />}
+        {icon && <Icon name={icon} className="text-muted-foreground size-5 shrink-0" />}
         <Controller
           name={name}
           control={control}
@@ -61,7 +61,7 @@ export function FormInput({
             onClick={() => setShowPassword(!showPassword)}
             className="text-muted-foreground hover:text-foreground transition-colors flex items-center cursor-pointer"
           >
-            {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+            {showPassword ? <Icon name="visibility_off" className="size-5" /> : <Icon name="visibility" className="size-5" />}
           </button>
         )}
       </div>

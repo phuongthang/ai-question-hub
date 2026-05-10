@@ -1,4 +1,4 @@
-import { Mail, Lock, User, UserCheck, Phone, Loader2 } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useFormContext } from "react-hook-form"
@@ -34,7 +34,7 @@ export function RegisterPage() {
             name="fullname"
             label={t("auth.fullNameLabel")}
             placeholder={t("auth.fullNamePlaceholder")}
-            icon={User}
+            icon="person"
           />
 
           {/* Username */}
@@ -42,7 +42,7 @@ export function RegisterPage() {
             name="username"
             label={t("auth.userNameLabel")}
             placeholder={t("auth.userNamePlaceholder")}
-            icon={UserCheck}
+            icon="person_check"
           />
 
           {/* Email */}
@@ -50,7 +50,7 @@ export function RegisterPage() {
             name="email"
             label={t("auth.emailLabel")}
             placeholder={t("auth.emailPlaceholder")}
-            icon={Mail}
+            icon="mail"
           />
 
           {/* Phone Number */}
@@ -58,7 +58,7 @@ export function RegisterPage() {
             name="phoneNumber"
             label={t("auth.phoneNumberLabel")}
             placeholder={t("auth.phoneNumberPlaceholder")}
-            icon={Phone}
+            icon="phone"
           />
 
           {/* Password */}
@@ -67,7 +67,7 @@ export function RegisterPage() {
             label={t("auth.passwordLabel")}
             placeholder="••••••••"
             type="password"
-            icon={Lock}
+            icon="lock"
           />
 
           {/* Confirm Password */}
@@ -76,7 +76,7 @@ export function RegisterPage() {
             label={t("auth.confirmPasswordLabel")}
             placeholder="••••••••"
             type="password"
-            icon={Lock}
+            icon="lock"
           />
 
           {/* Action Button */}
@@ -85,7 +85,7 @@ export function RegisterPage() {
             disabled={isLoading}
             className="w-full h-12 mt-4 rounded-full bg-[#2e5d97] hover:bg-[#214874] disabled:bg-[#2e5d97]/60 text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] disabled:translate-y-0 hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed"
           >
-            {isLoading && <Loader2 className="size-4 animate-spin" />}
+            {isLoading && <Icon name="progress_activity" className="size-4 animate-spin" />}
             {isLoading ? t("common.loading") : t("auth.registerButton")}
           </button>
         </form>

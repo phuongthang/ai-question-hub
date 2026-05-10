@@ -1,4 +1,4 @@
-import { Lock, User, Loader2 } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 import { Link } from "react-router-dom"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -36,7 +36,7 @@ export function LoginPage() {
             name="username"
             label={t("auth.userNameLabel")}
             placeholder={t("auth.userNamePlaceholder")}
-            icon={User}
+            icon="person"
           />
 
           {/* Password Input */}
@@ -45,7 +45,7 @@ export function LoginPage() {
             label={t("auth.passwordLabel")}
             type="password"
             placeholder="••••••••"
-            icon={Lock}
+            icon="lock"
           />
 
           {/* Controls */}
@@ -83,7 +83,7 @@ export function LoginPage() {
             disabled={isLoading}
             className="w-full h-12 mt-4 rounded-full bg-[#2e5d97] hover:bg-[#214874] disabled:bg-[#2e5d97]/60 text-white font-semibold text-sm shadow-[0_4px_14px_rgba(46,93,151,0.39)] hover:translate-y-[-2px] disabled:translate-y-0 hover:shadow-[0_6px_20px_rgba(46,93,151,0.23)] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed"
           >
-            {isLoading && <Loader2 className="size-4 animate-spin" />}
+            {isLoading && <Icon name="progress_activity" className="size-4 animate-spin" />}
             {isLoading ? t("common.loading") : t("auth.loginButton")}
           </button>
         </form>

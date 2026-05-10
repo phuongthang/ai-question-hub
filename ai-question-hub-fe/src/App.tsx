@@ -6,6 +6,8 @@ import { DashboardLayout } from "./layouts/DashboardLayout"
 import { LoginContainer } from "./pages/login/LoginContainer"
 
 import TopicsPage from "./pages/topics/TopicsPage"
+import CreateTopicPage from "./pages/topics/CreateTopicPage"
+import TopicDetailPage from "./pages/topics/TopicDetailPage"
 
 // Trang placeholder cho các mục đang phát triển
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
       { path: "questions", element: <PlaceholderPage title="Câu hỏi" /> },
       { path: "generate", element: <PlaceholderPage title="Tạo câu hỏi" /> },
       { path: "topics", element: <TopicsPage /> },
+      { path: "topics/create", element: <CreateTopicPage /> },
+      { path: "topics/:id", element: <TopicDetailPage /> },
       { path: "models", element: <PlaceholderPage title="Mô hình AI" /> },
       { path: "users", element: <PlaceholderPage title="Người dùng" /> },
       { path: "settings", element: <PlaceholderPage title="Cài đặt" /> },

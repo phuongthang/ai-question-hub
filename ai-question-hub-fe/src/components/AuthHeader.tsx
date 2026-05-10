@@ -1,4 +1,4 @@
-import { BrainCircuit } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 
 interface AuthHeaderProps {
   title: string
@@ -11,7 +11,7 @@ export function AuthHeader({ title, description }: AuthHeaderProps) {
       {/* Logo Header */}
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl logo-gradient flex items-center justify-center shadow-sm">
-          <BrainCircuit className="text-white size-6" />
+          <Icon name="psychology" className="text-white size-6" />
         </div>
         <h1 className="text-[22px] font-semibold tracking-[-0.3px] text-foreground font-sans">
           AI Q-Gen

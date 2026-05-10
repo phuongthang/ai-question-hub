@@ -1,17 +1,6 @@
 import * as React from "react"
-import {
-  Search,
-  BookOpen,
-  HelpCircle,
-  Briefcase,
-  MoreVertical,
-  ExternalLink,
-  ChevronRight,
-  Edit,
-  FileText,
-  Plus,
-  ListFilter,
-} from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { Icon } from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
@@ -50,10 +39,10 @@ const topicsData = [
     status: "using",
     colorScheme: "from-blue-600 to-indigo-600",
     projects: [
-      { id: "p1", name: "Frontend Dev Assessment 2024", questionsUsed: 45, icon: Briefcase },
-      { id: "p2", name: "JS Fundamentals Training", questionsUsed: 60, icon: BookOpen },
-      { id: "p3", name: "React Bootcamp Entrance", questionsUsed: 20, icon: FileText },
-      { id: "p4", name: "Fullstack Mid-level Quiz", questionsUsed: 15, icon: Briefcase },
+      { id: "p1", name: "Frontend Dev Assessment 2024", questionsUsed: 45, icon: "work" },
+      { id: "p2", name: "JS Fundamentals Training", questionsUsed: 60, icon: "menu_book" },
+      { id: "p3", name: "React Bootcamp Entrance", questionsUsed: 20, icon: "description" },
+      { id: "p4", name: "Fullstack Mid-level Quiz", questionsUsed: 15, icon: "work" },
     ]
   },
   {
@@ -144,6 +133,7 @@ export default function TopicsPage() {
   const [selectedTopic, setSelectedTopic] = React.useState<typeof topicsData[0] | null>(null)
   const [sheetOpen, setSheetOpen] = React.useState(false)
   const [searchQuery, setSearchQuery] = React.useState("")
+  const navigate = useNavigate()
 
   const openTopicDetails = (topic: typeof topicsData[0]) => {
     setSelectedTopic(topic)
@@ -164,7 +154,7 @@ export default function TopicsPage() {
           {/* Right Controls */}
           <div className="flex items-center gap-3 shrink-0">
             <div className="relative w-[220px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-ink-muted opacity-70" />
+              <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-ink-muted opacity-70" />
               <Input
                 placeholder="Tìm kiếm chủ đề..."
                 className="h-10 pl-9 bg-white/80 dark:bg-slate-950 border-slate-200 dark:border-slate-800/60 rounded-lg text-body shadow-none focus-visible:ring-[#2e5d97]/40"
@@ -174,12 +164,12 @@ export default function TopicsPage() {
             </div>
 
             <Button variant="outline" className="h-10 bg-white/80 dark:bg-slate-950 border-slate-200 dark:border-slate-800 px-4 font-medium text-body-medium flex items-center gap-2 text-ink-secondary hover:text-ink hover:bg-white transition-colors rounded-lg shadow-none">
-              <ListFilter className="size-4 opacity-80" />
+              <Icon name="filter_list" className="size-4 opacity-80" />
               <span>Lọc</span>
             </Button>
 
             <Button className="h-10 bg-[#2e5d97] hover:bg-[#264f82] text-white shadow-md shadow-[#2e5d97]/20 flex items-center gap-1.5 px-5 rounded-lg font-medium">
-              <Plus className="size-4" />
+              <Icon name="add" className="size-4" />
               <span>Thêm chủ đề</span>
             </Button>
           </div>
@@ -192,7 +182,7 @@ export default function TopicsPage() {
           <CardContent className="p-0">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-                <BookOpen className="size-5" />
+                <Icon name="menu_book" className="size-5" />
               </div>
               <span className="text-body-medium text-ink-secondary dark:text-slate-300">Tổng số chủ đề</span>
             </div>
@@ -206,7 +196,7 @@ export default function TopicsPage() {
           <CardContent className="p-0">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400">
-                <HelpCircle className="size-5" />
+                <Icon name="help" className="size-5" />
               </div>
               <span className="text-body-medium text-ink-secondary dark:text-slate-300">Tổng câu hỏi</span>
             </div>
@@ -220,7 +210,7 @@ export default function TopicsPage() {
           <CardContent className="p-0">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400">
-                <Briefcase className="size-5" />
+                <Icon name="work" className="size-5" />
               </div>
               <span className="text-body-medium text-ink-secondary dark:text-slate-300">Dự án sử dụng</span>
             </div>
@@ -234,7 +224,7 @@ export default function TopicsPage() {
           <CardContent className="p-0">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-                <BookOpen className="size-5" />
+                <Icon name="menu_book" className="size-5" />
               </div>
               <span className="text-body-medium text-ink-secondary dark:text-slate-300">Tổng số chủ đề</span>
             </div>
@@ -310,7 +300,7 @@ export default function TopicsPage() {
                     <Card className="p-3 bg-white dark:bg-slate-900/80 shadow-sm border-slate-200/60 dark:border-slate-800/60">
                       <CardContent className="p-0 flex flex-col items-center text-center">
                         <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 mb-2">
-                          <HelpCircle className="size-5 text-[#2e5d97]" />
+                          <Icon name="help" className="size-5 text-[#2e5d97]" />
                         </div>
                         <span className="text-stat text-ink dark:text-white">{selectedTopic.questionsCount}</span>
                         <span className="text-caption text-ink-muted mt-0.5">Câu hỏi</span>
@@ -319,7 +309,7 @@ export default function TopicsPage() {
                     <Card className="p-3 bg-white dark:bg-slate-900/80 shadow-sm border-slate-200/60 dark:border-slate-800/60">
                       <CardContent className="p-0 flex flex-col items-center text-center">
                         <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 mb-2">
-                          <Briefcase className="size-5 text-emerald-600 dark:text-emerald-400" />
+                          <Icon name="work" className="size-5 text-emerald-600 dark:text-emerald-400" />
                         </div>
                         <span className="text-stat text-ink dark:text-white">{selectedTopic.projectsCount || 0}</span>
                         <span className="text-caption text-ink-muted mt-0.5">Dự án</span>
@@ -356,17 +346,17 @@ export default function TopicsPage() {
 
                       <div className="space-y-2">
                         {(selectedTopic.projects || []).map((proj, idx) => {
-                          const ProjIcon = proj.icon || Briefcase;
+                          const ProjIcon = proj.icon || "work";
                           return (
                             <div key={idx} className="group flex items-center gap-3 p-3 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm cursor-pointer hover:border-blue-300 dark:hover:border-blue-700 transition-all">
                               <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 dark:group-hover:bg-blue-900/30 transition-colors">
-                                <ProjIcon className="size-4" />
+                                <Icon name={ProjIcon} className="size-4" />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="text-body-strong text-ink dark:text-slate-200 truncate">{proj.name}</div>
                                 <div className="text-caption text-ink-muted">Sử dụng {proj.questionsUsed} câu hỏi</div>
                               </div>
-                              <ChevronRight className="size-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                              <Icon name="chevron_right" className="size-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
                             </div>
                           )
                         })}
@@ -390,10 +380,16 @@ export default function TopicsPage() {
                 {/* Fixed Footer Section at bottom of the container */}
                 <div className="shrink-0 p-4 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-t border-slate-200/60 dark:border-slate-800/60 grid grid-cols-2 gap-3 z-10 mt-auto">
                   <Button variant="outline" className="h-11 text-body-strong text-ink-secondary bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg">
-                    <Edit className="mr-2 size-4" /> Chỉnh sửa
+                    <Icon name="edit" className="mr-2 size-4" /> Chỉnh sửa
                   </Button>
-                  <Button className="h-11 text-body-strong bg-[#2e5d97] hover:bg-[#2e5d97]/90 text-white shadow-md rounded-lg">
-                    Xem câu hỏi <ChevronRight className="ml-1 size-4" />
+                  <Button 
+                    className="h-11 text-body-strong bg-[#2e5d97] hover:bg-[#2e5d97]/90 text-white shadow-md rounded-lg"
+                    onClick={() => {
+                      setSheetOpen(false)
+                      navigate(`/topics/${selectedTopic.id}`)
+                    }}
+                  >
+                    Xem câu hỏi <Icon name="chevron_right" className="ml-1 size-4" />
                   </Button>
                 </div>
               </div>
@@ -425,15 +421,15 @@ function TopicCard({ topic, onOpen }: { topic: typeof topicsData[0], onOpen: () 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="size-8 rounded-full -mr-2 text-slate-400 hover:text-slate-700 dark:hover:text-white">
-                <MoreVertical className="size-4" />
+                <Icon name="more_vert" className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuItem className="text-body-medium flex items-center gap-2 cursor-pointer">
-                <Edit className="size-3.5" /> Sửa
+                <Icon name="edit" className="size-3.5" /> Sửa
               </DropdownMenuItem>
               <DropdownMenuItem className="text-body-medium flex items-center gap-2 cursor-pointer">
-                <ExternalLink className="size-3.5" /> Xem chi tiết
+                <Icon name="open_in_new" className="size-3.5" /> Xem chi tiết
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -447,11 +443,11 @@ function TopicCard({ topic, onOpen }: { topic: typeof topicsData[0], onOpen: () 
       <CardContent className="p-0 pt-0 flex-1 flex flex-col gap-4">
         <div className="flex items-center gap-4 text-ink-secondary dark:text-slate-400 text-body-medium">
           <div className="flex items-center gap-1.5">
-            <HelpCircle className="size-4 text-ink-muted" />
+            <Icon name="help" className="size-4 text-ink-muted" />
             <span>{topic.questionsCount}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Briefcase className="size-4 text-ink-muted" />
+            <Icon name="work" className="size-4 text-ink-muted" />
             <span>{topic.projectsCount}</span>
           </div>
         </div>
@@ -484,7 +480,7 @@ function TopicCard({ topic, onOpen }: { topic: typeof topicsData[0], onOpen: () 
           className="text-caption-strong text-[#2e5d97] dark:text-blue-400 p-0 h-auto gap-1 hover:no-underline group-hover:translate-x-1 transition-transform duration-300 cursor-pointer"
           onClick={onOpen}
         >
-          Xem chi tiết <ChevronRight className="size-3.5" />
+          Xem chi tiết <Icon name="chevron_right" className="size-3.5" />
         </Button>
       </CardFooter>
     </Card>
