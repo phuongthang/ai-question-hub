@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.repository.TopicRepository">
+
+    <resultMap id="TopicResultMap" type="com.aiquestionhub.aiquestionhubapi.api.model.Topic">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="deletedAt" column="deleted_at"/>
+        <result property="deletedBy" column="deleted_by"/>
+        <collection property="tags" column="id"
+                    select="com.aiquestionhub.aiquestionhubapi.api.repository.TopicTagRepository.findTagsByTopicId"
+                    javaType="java.util.ArrayList" ofType="com.aiquestionhub.aiquestionhubapi.api.model.Tag"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="TopicResultMap">
+        SELECT * FROM topics WHERE deleted_at IS NULL ORDER BY created_at DESC
+    </select>
+
+    <select id="findRecent" resultMap="TopicResultMap">
+        SELECT * FROM topics WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT #{limit}
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="TopicResultMap">
+        SELECT * FROM topics WHERE id = #{id} AND deleted_at IS NULL
+    </select>
+
+    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.Topic"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO topics (title, created_at, created_by)
+        VALUES (#{title}, CURRENT_TIMESTAMP, #{createdBy})
+    </insert>
+
+    <update id="update" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.Topic">
+        UPDATE topics
+        SET title      = #{title},
+            updated_at = CURRENT_TIMESTAMP,
+            updated_by = #{updatedBy}
+        WHERE id = #{id}
+          AND deleted_at IS NULL
+    </update>
+
+    <update id="deleteById" parameterType="long">
+        UPDATE topics
+        SET deleted_at = NOW()
+        WHERE id = #{id}
+          AND deleted_at IS NULL
+    </update>
+
+</mapper>

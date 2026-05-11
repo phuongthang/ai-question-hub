@@ -1,13 +1,18 @@
-import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom"
-import { AuthLayout } from "./layouts/AuthLayout"
-import { RegisterContainer } from "./pages/register/RegisterContainer"
-import { Dashboard } from "./components/Dashboard"
-import { DashboardLayout } from "./layouts/DashboardLayout"
-import { LoginContainer } from "./pages/login/LoginContainer"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { AuthLayout } from "./layouts/AuthLayout";
+import { RegisterContainer } from "./pages/register/RegisterContainer";
+import { Dashboard } from "./components/Dashboard";
+import { DashboardLayout } from "./layouts/DashboardLayout";
+import { LoginContainer } from "./pages/login/LoginContainer";
 
-import TopicsPage from "./pages/topics/TopicsPage"
-import CreateTopicPage from "./pages/topics/CreateTopicPage"
-import TopicDetailPage from "./pages/topics/TopicDetailPage"
+import TopicsContainer from "./pages/topics/TopicsContainer";
+import CreateTopicContainer from "./pages/topics/CreateTopicContainer";
+import TopicDetailPage from "./pages/topics/TopicDetailPage";
 
 // Trang placeholder cho các mục đang phát triển
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -21,7 +26,7 @@ const PlaceholderPage = ({ title }: { title: string }) => (
       </p>
     </div>
   </div>
-)
+);
 
 const router = createBrowserRouter([
   // Public Routes (Sử dụng AuthLayout làm layout chung)
@@ -34,7 +39,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginContainer /> },
       { path: "/register", element: <RegisterContainer /> },
-    ]
+    ],
   },
   // Protected Routes (Sử dụng DashboardLayout làm Layout chính)
   {
@@ -46,20 +51,20 @@ const router = createBrowserRouter([
       { path: "projects", element: <PlaceholderPage title="Dự án" /> },
       { path: "questions", element: <PlaceholderPage title="Câu hỏi" /> },
       { path: "generate", element: <PlaceholderPage title="Tạo câu hỏi" /> },
-      { path: "topics", element: <TopicsPage /> },
-      { path: "topics/create", element: <CreateTopicPage /> },
+      { path: "topics", element: <TopicsContainer /> },
+      { path: "topics/create", element: <CreateTopicContainer /> },
       { path: "topics/:id", element: <TopicDetailPage /> },
       { path: "models", element: <PlaceholderPage title="Mô hình AI" /> },
       { path: "users", element: <PlaceholderPage title="Người dùng" /> },
       { path: "settings", element: <PlaceholderPage title="Cài đặt" /> },
-    ]
+    ],
   },
   // Fallback Route
-  { path: "*", element: <Navigate to="/dashboard" replace /> }
-])
+  { path: "*", element: <Navigate to="/dashboard" replace /> },
+]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

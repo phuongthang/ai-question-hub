@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.repository.TagRepository">
+
+    <resultMap id="TagResultMap" type="com.aiquestionhub.aiquestionhubapi.api.model.Tag">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="slug" column="slug"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="deletedAt" column="deleted_at"/>
+        <result property="deletedBy" column="deleted_by"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="TagResultMap">
+        SELECT * FROM tags WHERE deleted_at IS NULL ORDER BY name ASC
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="TagResultMap">
+        SELECT * FROM tags WHERE id = #{id} AND deleted_at IS NULL
+    </select>
+
+    <select id="findByCode" parameterType="string" resultMap="TagResultMap">
+        SELECT * FROM tags WHERE code = #{code} AND deleted_at IS NULL
+    </select>
+
+    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.Tag"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tags (code, name, slug, created_at, created_by)
+        VALUES (#{code}, #{name}, #{slug}, CURRENT_TIMESTAMP, #{createdBy})
+    </insert>
+
+    <update id="update" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.Tag">
+        UPDATE tags
+        SET name       = #{name},
+            slug       = #{slug},
+            updated_at = CURRENT_TIMESTAMP,
+            updated_by = #{updatedBy}
+        WHERE id = #{id}
+          AND deleted_at IS NULL
+    </update>
+
+    <update id="deleteById" parameterType="long">
+        UPDATE tags
+        SET deleted_at = NOW()
+        WHERE id = #{id}
+          AND deleted_at IS NULL
+    </update>
+
+</mapper>
