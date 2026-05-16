@@ -31,6 +31,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.aiquestionhub.aiquestionhubapi
+  type-handlers-package: com.aiquestionhub.aiquestionhubapi.helper.typehandler
   configuration:
     map-underscore-to-camel-case: true
 

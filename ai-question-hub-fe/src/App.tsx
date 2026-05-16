@@ -13,6 +13,7 @@ import { LoginContainer } from "./pages/login/LoginContainer";
 import TopicsContainer from "./pages/topics/TopicsContainer";
 import CreateTopicContainer from "./pages/topics/CreateTopicContainer";
 import TopicDetailPage from "./pages/topics/TopicDetailPage";
+import { EditTopicContainer } from "./pages/topics/EditTopicContainer";
 
 // Trang placeholder cho các mục đang phát triển
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       { path: "topics", element: <TopicsContainer /> },
       { path: "topics/create", element: <CreateTopicContainer /> },
       { path: "topics/:id", element: <TopicDetailPage /> },
+      { path: "topics/:id/edit", element: <EditTopicContainer /> },
       { path: "models", element: <PlaceholderPage title="Mô hình AI" /> },
       { path: "users", element: <PlaceholderPage title="Người dùng" /> },
       { path: "settings", element: <PlaceholderPage title="Cài đặt" /> },

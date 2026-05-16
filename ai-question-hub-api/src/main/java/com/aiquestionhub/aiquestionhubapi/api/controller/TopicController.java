@@ -3,6 +3,7 @@ package com.aiquestionhub.aiquestionhubapi.api.controller;
 import com.aiquestionhub.aiquestionhubapi.api.mapper.TopicMapper;
 import com.aiquestionhub.aiquestionhubapi.api.model.Topic;
 import com.aiquestionhub.aiquestionhubapi.api.request.TopicRequest;
+import com.aiquestionhub.aiquestionhubapi.api.response.TopicDetailResponse;
 import com.aiquestionhub.aiquestionhubapi.api.response.TopicResponse;
 import com.aiquestionhub.aiquestionhubapi.api.service.TopicService;
 import com.aiquestionhub.aiquestionhubapi.helper.base.construct.IRestfullService;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,5 +51,10 @@ public class TopicController extends RestfullController<Topic, TopicRequest, Top
                 .map(this::toResponse)
                 .toList();
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{id}/detail")
+    public ResponseEntity<TopicDetailResponse> getDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(topicService.getDetail(id));
     }
 }

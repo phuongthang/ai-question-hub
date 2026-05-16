@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aiquestionhub.aiquestionhubapi.api.repository.TopicActivityLogRepository">
+
+    <resultMap id="TopicActivityLogResultMap" type="com.aiquestionhub.aiquestionhubapi.api.model.TopicActivityLog">
+        <id property="id" column="id"/>
+        <result property="topicId"    column="topic_id"/>
+        <result property="actionType" column="action_type"
+                typeHandler="com.aiquestionhub.aiquestionhubapi.helper.typehandler.TopicActivityActionTypeHandler"/>
+        <result property="actorId"    column="actor_id"/>
+        <result property="projectId"  column="project_id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="tagId"      column="tag_id"/>
+        <result property="detail"     column="detail"/>
+        <result property="createdAt"  column="created_at"/>
+        <result property="createdBy"  column="created_by"/>
+        <result property="updatedAt"  column="updated_at"/>
+        <result property="updatedBy"  column="updated_by"/>
+        <result property="deletedAt"  column="deleted_at"/>
+        <result property="deletedBy"  column="deleted_by"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="TopicActivityLogResultMap">
+        SELECT * FROM topic_activity_logs WHERE deleted_at IS NULL ORDER BY created_at DESC
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="TopicActivityLogResultMap">
+        SELECT * FROM topic_activity_logs WHERE id = #{id} AND deleted_at IS NULL
+    </select>
+
+    <select id="findByTopicId" parameterType="long" resultMap="TopicActivityLogResultMap">
+        SELECT * FROM topic_activity_logs WHERE topic_id = #{topicId} AND deleted_at IS NULL ORDER BY created_at DESC
+    </select>
+
+    <insert id="insert" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.TopicActivityLog"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO topic_activity_logs (topic_id, action_type, actor_id, project_id, question_id, tag_id, detail, created_at, created_by)
+        VALUES (
+            #{topicId},
+            #{actionType.value},
+            #{actorId},
+            #{projectId},
+            #{questionId},
+            #{tagId},
+            #{detail}::jsonb,
+            CURRENT_TIMESTAMP,
+            #{createdBy}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aiquestionhub.aiquestionhubapi.api.model.TopicActivityLog">
+        UPDATE topic_activity_logs
+        SET detail     = #{detail}::jsonb,
+            updated_at = CURRENT_TIMESTAMP,
+            updated_by = #{updatedBy}
+        WHERE id = #{id} AND deleted_at IS NULL
+    </update>
+
+    <update id="deleteById" parameterType="long">
+        UPDATE topic_activity_logs
+        SET deleted_at = NOW()
+        WHERE id = #{id} AND deleted_at IS NULL
+    </update>
+
+    <!-- findByCode not applicable for log table; returns empty -->
+    <select id="findByCode" parameterType="string" resultMap="TopicActivityLogResultMap">
+        SELECT * FROM topic_activity_logs WHERE 1 = 0
+    </select>
+
+</mapper>
